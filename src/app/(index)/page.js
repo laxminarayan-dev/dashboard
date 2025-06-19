@@ -1,5 +1,3 @@
-"use client";
-import React from "react";
 import KPIBoxGroup from "@/components/KpiBox";
 import ChartGroup from "@/components/Charts/ChartGroup";
 

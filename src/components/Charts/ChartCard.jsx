@@ -1,3 +1,4 @@
+"use client";
 import React, {
   useState,
   useEffect,
@@ -55,8 +56,6 @@ const LoadingSkeleton = React.memo(() => (
   </div>
 ));
 
-// --- Hooks and Utilities (No changes needed here) ---
-
 const useIntersectionObserver = (options) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -84,9 +83,6 @@ const sampleData = (data, maxPoints) => {
   return data.filter((_, index) => index % step === 0);
 };
 
-/**
- * A modular and performance-optimized chart component card.
- */
 const ChartCard = ({
   title,
   type,
@@ -158,7 +154,6 @@ const ChartCard = ({
           <LineChart
             data={processedData}
             margin={{ top: 5, right: 20, left: 0, bottom: 35 }}
-            isAnimationActive={false}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
             <XAxis {...commonXAxisProps} />
@@ -179,7 +174,6 @@ const ChartCard = ({
                 stroke={colors[index % colors.length]}
                 strokeWidth={2}
                 dot={false}
-                isAnimationActive={false}
               />
             ))}
           </LineChart>
@@ -190,7 +184,6 @@ const ChartCard = ({
           <BarChart
             data={processedData}
             margin={{ top: 5, right: 0, left: 0, bottom: 35 }}
-            isAnimationActive={false}
           >
             <CartesianGrid strokeDasharray="2 2" stroke="#334155" />
             <XAxis {...commonXAxisProps} />
@@ -209,7 +202,6 @@ const ChartCard = ({
                 dataKey={key}
                 fill={colors[index % colors.length]}
                 radius={[5, 5, 0, 0]}
-                isAnimationActive={false}
               />
             ))}
           </BarChart>
