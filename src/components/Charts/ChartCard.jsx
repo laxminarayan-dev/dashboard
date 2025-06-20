@@ -249,8 +249,7 @@ const ChartCard = ({
       style={{ contain: "layout style paint" }}
     >
       <div className="bg-transparent rounded-xl text-white shadow-sm">
-        {/* This h3 is now free to render immediately! */}
-        <h3 className="font-bold text-xl text-slate-800  mb-4">{title}</h3>
+        <h1 className="font-bold text-xl text-slate-800  mb-4">{title}</h1>
         <div className="h-[300px]">{renderContent()}</div>
       </div>
     </div>

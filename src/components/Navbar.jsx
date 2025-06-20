@@ -71,17 +71,17 @@ const Navbar = () => {
   ];
   return (
     <>
-      <nav className="fixed w-full z-100 bg-slate-100 shadow-sm  min-h-16 max-h-16">
+      <nav className="fixed w-full z-100 bg-slate-100 border-b border-slate-200 min-h-16 max-h-16">
         <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div className="flex w-full items-center justify-between">
             <div className="flex md:hidden">
               <button
                 onClick={() => setIsMobileSidebarOpen(true)}
                 type="button"
-                className="text-gray-500  hover:text-gray-600  focus:outline-none focus:text-gray-600 "
-                aria-label="toggle menu"
+                className="text-gray-500  hover:text-gray-600  focus:outline-none focus:text-gray-600 cursor-pointer"
               >
                 <Menu />
+                {""}
               </button>
             </div>
           </div>
@@ -92,14 +92,14 @@ const Navbar = () => {
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`fixed z-101 top-0 left-0 h-screen bg-gray-800 text-white p-4 transition-transform duration-300 ease-in-out
+          className={`fixed z-101 top-0 left-0 h-screen border-r border-slate-300 p-4 transition-transform duration-300 ease-in-out
           ${isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0 md:block md:w-64 h-screen bg-slate-100  w-64 rounded-br-xl rounded-tr-xl md:rounded-none`}
+          md:translate-x-0 md:block md:w-64 h-screen bg-slate-100 text-slate-900  w-64 rounded-br-xl rounded-tr-xl md:rounded-none`}
         >
           <div className="flex justify-between items-center pr-2 text-slate-800 ">
             <p>Logo</p>
             <button
-              className="md:hidden"
+              className="md:hidden text-slate-900 cursor-pointer"
               onClick={() => setIsMobileSidebarOpen(false)}
             >
               <X />

@@ -4,7 +4,7 @@ import ChartGroup from "@/components/Charts/ChartGroup";
 export default function Home() {
   return (
     <>
-      <div className="pl-0 mt-18 md:pl-64 w-full flex-col scroll-smooth justify-center items-center flex-1 bg-transparent">
+      <div className=" w-full flex-col scroll-smooth justify-center items-center flex-1 bg-transparent">
         <h1 className="text-3xl my-2 text-gray-800 font-bold">Dashboard</h1>
         <KPIBoxGroup />
         <ChartGroup />
@@ -17,5 +17,3 @@ export default function Home() {
     </>
   );
 }
-
-
