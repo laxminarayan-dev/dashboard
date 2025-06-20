@@ -25,8 +25,8 @@ const KPIBoxGroup = () => {
   ];
 
   return (
-    <div className="kpi-box-group">
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 p-5">
+    <div className="mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-5">
         {kpiBoxes.map((box, index) => (
           <div
             key={index + box.title}

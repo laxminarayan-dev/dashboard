@@ -1,5 +1,6 @@
 import KPIBoxGroup from "@/components/KpiBox";
 import ChartGroup from "@/components/Charts/ChartGroup";
+import TableGroup from "@/components/TableGroup";
 
 export default function Home() {
   return (
@@ -8,11 +9,7 @@ export default function Home() {
         <h1 className="text-3xl my-2 text-gray-800 font-bold">Dashboard</h1>
         <KPIBoxGroup />
         <ChartGroup />
-        <KPIBoxGroup />
-        <KPIBoxGroup />
-        <KPIBoxGroup />
-        <KPIBoxGroup />
-        <KPIBoxGroup />
+        <TableGroup />
       </div>
     </>
   );

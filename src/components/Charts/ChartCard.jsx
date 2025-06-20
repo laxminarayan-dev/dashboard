@@ -171,7 +171,7 @@ const ChartCard = ({
                 key={key}
                 type="monotone"
                 dataKey={key}
-                stroke={colors[index % colors.length]}
+                stroke={colors[index + 1]}
                 strokeWidth={2}
                 dot={false}
               />
