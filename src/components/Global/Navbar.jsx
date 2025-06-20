@@ -13,6 +13,7 @@ import {
   LogOut,
   Menu,
 } from "lucide-react";
+import Image from "next/image";
 const Navbar = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -97,7 +98,7 @@ const Navbar = () => {
           md:translate-x-0 md:block md:w-64 h-screen bg-white text-slate-900  w-64 rounded-br-xl rounded-tr-xl md:rounded-none`}
         >
           <div className="flex justify-between items-center pr-2 text-slate-800 ">
-            <p>Logo</p>
+            <Image src="/logo.png" width={70} height={70} alt="Logo" />
             <button
               className="md:hidden text-slate-900 cursor-pointer"
               onClick={() => setIsMobileSidebarOpen(false)}
@@ -106,7 +107,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="flex flex-col justify-between flex-1 mt-6">
+          <div className="flex flex-col justify-between flex-1 ">
             <nav className="mx-1 space-y-6 ">
               {sidebarItems.map((section, index) => (
                 <div key={section.title + index} className="space-y-3 ">
