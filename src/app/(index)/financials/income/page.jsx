@@ -1,4 +1,4 @@
-import Header from "./Header";
+import CommonHeader from "@/components/Financial/CommonHeader";
 import CommonTable from "@/components/Financial/CommonTable";
 
 const ManageIncome = () => {
@@ -49,7 +49,7 @@ const ManageIncome = () => {
 
   return (
     <div>
-      <Header />
+      <CommonHeader forWho={"income"} />
       <CommonTable table={incomeTable} />
     </div>
   );
