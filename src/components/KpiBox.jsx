@@ -30,14 +30,14 @@ const KPIBoxGroup = () => {
         {kpiBoxes.map((box, index) => (
           <div
             key={index + box.title}
-            className="bg-transparent dar p-6 rounded-lg shadow-sm border dark:border-slate-100"
+            className="bg-transparent dar p-6 rounded-lg shadow-sm border "
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                <p className="text-sm font-medium text-gray-600 ">
                   {box.title}
                 </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className="text-2xl font-bold text-gray-900 ">
                   {box.counts}
                 </p>
                 <div className="flex items-center mt-2">

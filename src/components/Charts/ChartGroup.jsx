@@ -22,7 +22,7 @@ const categoryData = [
 
 const ChartGroup = () => {
   return (
-    <div className="grid grid-cols-12 w-full h-fit place-items-center p-5 gap-4">
+    <div className="grid grid-cols-12 w-full h-fit place-items-center gap-4">
       <ChartCard
         title="Weekly Cash Flow"
         type="line"
