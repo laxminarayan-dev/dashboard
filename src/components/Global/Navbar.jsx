@@ -71,7 +71,7 @@ const Navbar = () => {
   ];
   return (
     <>
-      <nav className="fixed w-full z-100 bg-slate-100 border-b border-slate-200 min-h-16 max-h-16">
+      <nav className="fixed w-full z-100 bg-white border-b border-slate-200 min-h-16 max-h-16">
         <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div className="flex w-full items-center justify-between">
             <div className="flex md:hidden">
@@ -94,7 +94,7 @@ const Navbar = () => {
         <div
           className={`fixed z-101 top-0 left-0 h-screen border-r border-slate-300 p-4 transition-transform duration-300 ease-in-out
           ${isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0 md:block md:w-64 h-screen bg-slate-100 text-slate-900  w-64 rounded-br-xl rounded-tr-xl md:rounded-none`}
+          md:translate-x-0 md:block md:w-64 h-screen bg-white text-slate-900  w-64 rounded-br-xl rounded-tr-xl md:rounded-none`}
         >
           <div className="flex justify-between items-center pr-2 text-slate-800 ">
             <p>Logo</p>

@@ -1,5 +1,5 @@
 import "../globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Global/Navbar";
 
 export const metadata = {
   title: "MrHalwai Admin Dashboard",
@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="bg-gray-100 text-slate-900 min-h-[100-dvh] ">
+        <div className="bg-stone-100 text-slate-900 min-h-[100-dvh] ">
           <div className="flex-1 flex flex-col">
             <Navbar />
             <div className="overflow-y-scroll h-screen p-5">

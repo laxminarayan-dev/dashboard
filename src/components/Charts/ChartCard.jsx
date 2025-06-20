@@ -142,10 +142,27 @@ const ChartCard = ({
     const commonXAxisProps = {
       dataKey: categoryKey,
       stroke: "#94a3b8",
-      tick: { fontSize: 12 },
+      tick: { fontSize: 14 },
       angle: -30,
       textAnchor: "end",
       interval: tickInterval,
+    };
+
+    const CustomBar = (props) => {
+      const { x, y, width, height, fill } = props;
+
+      return (
+        <rect
+          x={x}
+          y={y}
+          width={width}
+          height={height}
+          fill={fill + "90"}
+          stroke={fill} // Border color
+          strokeWidth={2} // Border width
+          ry={5}
+        />
+      );
     };
 
     switch (type) {
@@ -155,25 +172,25 @@ const ChartCard = ({
             data={processedData}
             margin={{ top: 5, right: 20, left: 0, bottom: 35 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <CartesianGrid strokeDasharray="2 2" stroke="#33415540" />
             <XAxis {...commonXAxisProps} />
-            <YAxis stroke="#94a3b8" tick={{ fontSize: 12 }} />
+            <YAxis stroke="#94a3b8" tick={{ fontSize: 14 }} />
             <Tooltip
               cursor={false}
               contentStyle={{
-                backgroundColor: "#1e293b",
+                backgroundColor: "#1f2937",
                 border: "1px solid #334155",
+                borderRadius: "8px",
               }}
             />
             <Legend verticalAlign="top" height={36} />
             {dataKey.map((key, index) => (
               <Line
                 key={key}
-                type="monotone"
+                type="natural"
                 dataKey={key}
                 stroke={colors[index + 1]}
                 strokeWidth={2}
-                dot={false}
               />
             ))}
           </LineChart>
@@ -185,14 +202,15 @@ const ChartCard = ({
             data={processedData}
             margin={{ top: 5, right: 0, left: 0, bottom: 35 }}
           >
-            <CartesianGrid strokeDasharray="2 2" stroke="#334155" />
+            <CartesianGrid strokeDasharray="2 2" stroke="#33415540" />
             <XAxis {...commonXAxisProps} />
-            <YAxis stroke="#94a3b8" tick={{ fontSize: 12 }} />
+            <YAxis stroke="#94a3b8" tick={{ fontSize: 14 }} />
             <Tooltip
               cursor={false}
               contentStyle={{
-                backgroundColor: "#1e293b",
+                backgroundColor: "#1f2937",
                 border: "1px solid #334155",
+                borderRadius: "8px",
               }}
             />
             <Legend verticalAlign="top" height={36} />
@@ -201,7 +219,7 @@ const ChartCard = ({
                 key={key}
                 dataKey={key}
                 fill={colors[index % colors.length]}
-                radius={[5, 5, 0, 0]}
+                shape={<CustomBar />}
               />
             ))}
           </BarChart>
@@ -243,12 +261,8 @@ const ChartCard = ({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="col-span-12 lg:col-span-6 w-full"
-      style={{ contain: "layout style paint" }}
-    >
-      <div className="bg-transparent rounded-xl text-white shadow-sm">
+    <div ref={containerRef} className="col-span-12 lg:col-span-6 w-full">
+      <div className="bg-white text-white font-semibold font-mono px-5 py-4 rounded-lg shadow-sm ">
         <h1 className="font-bold text-xl text-slate-800  mb-4">{title}</h1>
         <div className="h-[300px]">{renderContent()}</div>
       </div>

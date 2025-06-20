@@ -30,7 +30,7 @@ const KPIBoxGroup = () => {
         {kpiBoxes.map((box, index) => (
           <div
             key={index + box.title}
-            className="bg-transparent dar p-6 rounded-lg shadow-sm border "
+            className="bg-white dar p-6 rounded-lg shadow-sm border border-slate-300"
           >
             <div className="flex items-center justify-between">
               <div>

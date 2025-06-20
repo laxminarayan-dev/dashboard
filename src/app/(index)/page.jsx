@@ -1,6 +1,6 @@
-import KPIBoxGroup from "@/components/KpiBox";
+import KPIBoxGroup from "@/components/Dashboard/KpiBox";
 import ChartGroup from "@/components/Charts/ChartGroup";
-import TableGroup from "@/components/TableGroup";
+import TableGroup from "@/components/Dashboard/TableGroup";
 
 export default function Home() {
   return (

@@ -103,51 +103,55 @@ const TableGroup = () => {
   return (
     <>
       <div>
-        {tables.map((table, index) => (
-          <div
-            key={table.title + index}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-5"
-          >
-            <div className="bg-transparent p-6 rounded-lg">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold ">{table.title}</h3>
-                <Link
-                  className="text-blue-600 hover:text-blue-800 text-sm cursor-pointer font-medium"
-                  href={table.path}
-                >
-                  View All
-                </Link>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b dark:border-gray-100/40">
-                      {table.headings.map((heading) => (
-                        <th key={heading} className="text-left py-2 ">
-                          {heading}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {table.list.map((list, index) => (
-                      <tr key={index} className="border-b ">
-                        {Object.entries(list).map(([key, value], index) => (
-                          <td
-                            key={key + index}
-                            className="py-2 font-medium text-slate-600"
-                          >
-                            {value}
-                          </td>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 my-4">
+          {tables.map((table, index) => (
+            <div
+              key={table.title + index}
+              className="bg-white rounded-lg shadow-sm"
+            >
+              <div className="bg-transparent p-6 rounded-lg">
+                <div className="w-full flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold ">{table.title}</h3>
+                  <Link
+                    className="text-blue-600 hover:text-blue-800 text-sm cursor-pointer font-medium"
+                    href={table.path}
+                  >
+                    View All
+                  </Link>
+                </div>
+                <div className="overflow-x-scroll md:overflow-hidden">
+                  <div className=" w-[30rem] md:w-full">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b ">
+                          {table.headings.map((heading) => (
+                            <th key={heading} className="text-left py-2 ">
+                              {heading}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {table.list.map((list, index) => (
+                          <tr key={index} className="border-b ">
+                            {Object.entries(list).map(([key, value], index) => (
+                              <td
+                                key={key + index}
+                                className="py-2 font-medium text-slate-600"
+                              >
+                                {value}
+                              </td>
+                            ))}
+                          </tr>
                         ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );
