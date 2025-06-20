@@ -37,7 +37,7 @@ const Navbar = () => {
           id: "financials",
           label: "Financials",
           icon: BadgeIndianRupee,
-          path: "/financials",
+          path: "/financials/expenses",
         },
         {
           id: "inventory",

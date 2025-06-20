@@ -264,7 +264,7 @@ const ChartCard = ({
     <div ref={containerRef} className="col-span-12 lg:col-span-6 w-full">
       <div className="bg-white text-white font-semibold font-mono px-5 py-4 rounded-lg shadow-sm ">
         <h1 className="font-bold text-xl text-slate-800  mb-4">{title}</h1>
-        <div className="h-[300px]">{renderContent()}</div>
+        <div className="h-[300px] md:h-[350px]">{renderContent()}</div>
       </div>
     </div>
   );

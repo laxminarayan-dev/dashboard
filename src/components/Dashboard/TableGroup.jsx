@@ -103,13 +103,10 @@ const TableGroup = () => {
   return (
     <>
       <div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 my-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-5 my-4">
           {tables.map((table, index) => (
-            <div
-              key={table.title + index}
-              className="bg-white rounded-lg shadow-sm"
-            >
-              <div className="bg-transparent p-6 rounded-lg">
+            <div key={table.title + index} className="bg-transparent">
+              <div className="w-full shadow-sm bg-white p-6 rounded-lg">
                 <div className="w-full flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold ">{table.title}</h3>
                   <Link
@@ -119,9 +116,9 @@ const TableGroup = () => {
                     View All
                   </Link>
                 </div>
-                <div className="overflow-x-scroll md:overflow-hidden">
-                  <div className=" w-[30rem] md:w-full">
-                    <table className="w-full text-sm">
+                <div className="overflow-x-auto">
+                  <div className="min-w-[30rem] w-full ">
+                    <table className="w-[inherit] text-sm">
                       <thead>
                         <tr className="border-b ">
                           {table.headings.map((heading) => (
