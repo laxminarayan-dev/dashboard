@@ -38,7 +38,12 @@ const Navbar = () => {
           id: "financials",
           label: "Financials",
           icon: BadgeIndianRupee,
-          path: "/financials/expenses",
+          path: "/financials/expenses", // This is used for router.push
+          matchPaths: [
+            "/financials/expenses",
+            "/financials/salary",
+            "/financials/income",
+          ], // This is used for active highlighting
         },
         {
           id: "inventory",
@@ -122,7 +127,9 @@ const Navbar = () => {
                         key={link.id + index}
                         type="button"
                         className={`flex w-full items-center px-3 py-2 transition-colors duration-300 transform rounded-lg text-gray-600 cursor-pointer ${
-                          pathname == link.path &&
+                          (link.matchPaths
+                            ? link.matchPaths.includes(pathname)
+                            : pathname === link.path) &&
                           "bg-gradient-to-r from-indigo-400/50 via-indigo-400/30 to-indigo-500/0 "
                         }`}
                         onClick={() => {
