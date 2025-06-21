@@ -31,7 +31,11 @@ const CommonTable = ({ table }) => {
                 } else {
                   return (
                     <td key={key}>
-                      <ActionButtons id={tr.id} />
+                      <ActionButtons
+                        id={tr.id}
+                        fields={table.fields}
+                        data={tr}
+                      />
                     </td>
                   );
                 }

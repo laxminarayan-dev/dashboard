@@ -1,159 +1,23 @@
 "use client";
+import RenderFields from "../Shared/RenderFields";
 import { useState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 
-const CommonHeader = ({ forWho }) => {
+const CommonHeader = ({ forWho, fields }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Helper function to capitalize strings for display
+  const capitalize = (str) =>
+    str
+      .split(" ")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
   // Configuration object for different form types
-  const headerConfig = {
-    expenses: {
-      title: "Expense",
-      fields: [
-        { name: "date", label: "Date", type: "date", required: true },
-        {
-          name: "source",
-          label: "Source",
-          type: "text",
-          required: true,
-          placeholder: "e.g., Office Supplies, Business Lunch",
-        },
-        {
-          name: "amount",
-          label: "Amount",
-          type: "number",
-          required: true,
-          placeholder: "0.00",
-          step: "0.01",
-          min: "0",
-          prefix: "$",
-        },
-        {
-          name: "paymentMethod",
-          label: "Payment Method",
-          type: "select",
-          required: false,
-          options: [
-            "cash",
-            "credit card",
-            "debit card",
-            "bank transfer",
-            "check",
-            "paypal",
-          ],
-          default: "cash",
-        },
-      ],
-    },
-    salary: {
-      title: "Salary",
-      fields: [
-        {
-          name: "date",
-          label: "Payment Date",
-          type: "date",
-          required: true,
-        },
-        {
-          name: "employeeName",
-          label: "Employee Name",
-          type: "text",
-          required: true,
-          placeholder: "e.g., Rahul Sharma",
-        },
-        {
-          name: "employeeId",
-          label: "Employee ID",
-          type: "text",
-          required: true,
-          placeholder: "e.g., EMP001",
-        },
-        {
-          name: "amount",
-          label: "Salary Amount",
-          type: "number",
-          required: true,
-          placeholder: "0.00",
-          step: "0.01",
-          min: "0",
-          prefix: "₹",
-        },
-        {
-          name: "paymentMethod",
-          label: "Payment Method",
-          type: "select",
-          required: false,
-          options: [
-            "cash",
-            "credit card",
-            "debit card",
-            "bank transfer",
-            "check",
-            "UPI",
-          ],
-          default: "bank transfer",
-        },
-      ],
-    },
-    income: {
-      title: "Income",
-      fields: [
-        {
-          name: "date",
-          label: "Income Date",
-          type: "date",
-          required: true,
-        },
-        {
-          name: "source",
-          label: "Income Source",
-          type: "text",
-          required: true,
-          placeholder: "e.g., Swiggy, Zomato, Walk-in Customer",
-        },
-        {
-          name: "amount",
-          label: "Income Amount",
-          type: "number",
-          required: true,
-          placeholder: "0.00",
-          step: "0.01",
-          min: "0",
-          prefix: "₹",
-        },
-        {
-          name: "paymentMethod",
-          label: "Payment Method",
-          type: "select",
-          required: false,
-          options: [
-            "cash",
-            "credit card",
-            "debit card",
-            "bank transfer",
-            "UPI",
-            "paypal",
-          ],
-          default: "cash",
-        },
-        {
-          name: "orderId",
-          label: "Order ID",
-          type: "text",
-          required: false,
-          placeholder: "Optional Order ID",
-        },
-      ],
-    },
-  };
-
-  // Get the current configuration based on the 'forWho' prop
-  const currentConfig = headerConfig[forWho];
 
   // Dynamically create initial state for the form
   const createInitialState = () => {
     const initialState = {};
-    currentConfig.fields.forEach((field) => {
+    fields.forEach((field) => {
       initialState[field.name] = field.default || "";
     });
     return initialState;
@@ -174,98 +38,9 @@ const CommonHeader = ({ forWho }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Submitting new ${currentConfig.title}:`, formData);
+    console.log(`Submitting new ${forWho}:`, formData);
     // Add your API call or state management logic here
     setIsModalOpen(false);
-  };
-
-  // Helper function to capitalize strings for display
-  const capitalize = (str) =>
-    str
-      .split(" ")
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(" ");
-
-  // Render a single form field based on its configuration
-  const renderField = (field) => {
-    const commonInputClass =
-      "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500";
-
-    const label = (
-      <label
-        htmlFor={field.name}
-        className="block text-sm font-medium text-gray-700 mb-1"
-      >
-        {field.label}{" "}
-        {field.required && <span className="text-red-500">*</span>}
-      </label>
-    );
-
-    switch (field.type) {
-      case "select":
-        return (
-          <div key={field.name}>
-            {label}
-            <select
-              id={field.name}
-              name={field.name}
-              value={formData[field.name]}
-              onChange={handleInputChange}
-              required={field.required}
-              className={commonInputClass}
-            >
-              {field.options.map((option) => (
-                <option key={option} value={option}>
-                  {capitalize(option)}
-                </option>
-              ))}
-            </select>
-          </div>
-        );
-
-      case "number":
-        return (
-          <div key={field.name}>
-            {label}
-            <div className="relative">
-              {field.prefix && (
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 pointer-events-none">
-                  {field.prefix}
-                </span>
-              )}
-              <input
-                id={field.name}
-                type="number"
-                name={field.name}
-                value={formData[field.name]}
-                onChange={handleInputChange}
-                required={field.required}
-                placeholder={field.placeholder}
-                step={field.step}
-                min={field.min}
-                className={`${commonInputClass} ${field.prefix ? "pl-7" : ""}`}
-              />
-            </div>
-          </div>
-        );
-
-      default: // Handles 'text', 'date', etc.
-        return (
-          <div key={field.name}>
-            {label}
-            <input
-              id={field.name}
-              type={field.type}
-              name={field.name}
-              value={formData[field.name]}
-              onChange={handleInputChange}
-              required={field.required}
-              placeholder={field.placeholder}
-              className={commonInputClass}
-            />
-          </div>
-        );
-    }
   };
 
   return (
@@ -276,7 +51,7 @@ const CommonHeader = ({ forWho }) => {
           onClick={openModal}
           className="bg-white text-sm px-3 py-2 rounded-full border border-gray-200 shadow-xs cursor-pointer flex justify-center items-center gap-1 hover:bg-gray-50"
         >
-          <Plus size={16} /> Add {currentConfig.title}
+          <Plus size={16} /> Add {capitalize(forWho)}
         </button>
       </div>
 
@@ -291,10 +66,10 @@ const CommonHeader = ({ forWho }) => {
             <div className="flex items-center justify-between pb-3 border-b border-gray-200">
               <div>
                 <h3 className="text-slate-900 text-xl font-semibold">
-                  Add New {currentConfig.title}
+                  Add New {capitalize(forWho)}
                 </h3>
                 <p className="text-slate-600 text-xs mt-1">
-                  Enter {currentConfig.title.toLowerCase()} details
+                  Enter {forWho.toLowerCase()} details
                 </p>
               </div>
               <X
@@ -304,9 +79,16 @@ const CommonHeader = ({ forWho }) => {
             </div>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-              {currentConfig.fields.map((field) => renderField(field))}
+              {fields.map((field, index) => (
+                <RenderFields
+                  key={index}
+                  field={field}
+                  handleInputChange={handleInputChange}
+                  formData={formData}
+                />
+              ))}
 
-              <div className="border-t pt-6 flex gap-4">
+              <div className="border-t border-gray-200 pt-6 flex gap-4">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
@@ -318,7 +100,7 @@ const CommonHeader = ({ forWho }) => {
                   type="submit"
                   className="w-full px-4 py-2 rounded-lg text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
                 >
-                  Add {currentConfig.title}
+                  Add {capitalize(forWho)}
                 </button>
               </div>
             </form>
