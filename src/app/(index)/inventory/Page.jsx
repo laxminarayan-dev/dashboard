@@ -69,12 +69,13 @@ const InventoryManagement = () => {
             key={index}
             className="border border-gray-100 bg-white shadow-sm rounded-md overflow-hidden"
           >
-            <div className="relative w-full h-72">
+            <div className="relative w-full h-52 md:h-64">
               {/* image */}
               <Image
                 src={item.foodimageurl}
                 alt="Image"
                 fill // Next.js will use the parent div’s size
+                sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: "cover" }}
                 priority
               />
@@ -88,11 +89,11 @@ const InventoryManagement = () => {
               <h3 className="flex justify-start items-center text-2xl font-bold">
                 <IndianRupee size={16} /> {item.foodprice}
               </h3>
-              <div className="flex flex-row justify-between items-center gap-2">
-                <button className="font-semibold text-gray-800 bg-amber-400 p-1 flex-1 rounded-sm">
+              <div className="flex flex-row justify-between items-center mt-2 gap-2">
+                <button className="font-semibold font-mono bg-amber-400 text-gray-100 p-1 flex-1 rounded-full cursor-pointer">
                   Edit
                 </button>
-                <button className="font-semibold text-gray-800 bg-red-400 p-1 flex-1 rounded-sm">
+                <button className="font-semibold font-mono bg-red-400 text-gray-100 p-1 flex-1 rounded-full cursor-pointer">
                   Remove
                 </button>
               </div>
