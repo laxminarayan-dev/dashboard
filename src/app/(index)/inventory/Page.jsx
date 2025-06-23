@@ -1,60 +1,62 @@
 import Header from "@/components/Inventory/Header";
+import Actions from "@/components/Inventory/Actions";
 import { IndianRupee } from "lucide-react";
 import Image from "next/image";
+
 const InventoryManagement = () => {
   const foodItems = [
     {
       id: "1",
-      foodname: "Margherita Pizza",
-      foodimageurl: "/foodImages/margherita.jpg",
-      fooddescription:
+      foodName: "Margherita Pizza",
+      foodImageUrl: "/foodImages/margherita.jpg",
+      foodDescription:
         "Classic pizza topped with fresh tomatoes, mozzarella, and basil.",
-      foodprice: 299,
-      foodavailability: true,
+      foodPrice: 299,
+      foodAvailability: true,
     },
     {
       id: "2",
-      foodname: "Veg Biryani",
-      foodimageurl: "/foodImages/veg-biryani.jpg",
-      fooddescription:
+      foodName: "Veg Biryani",
+      foodImageUrl: "/foodImages/veg-biryani.jpg",
+      foodDescription:
         "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
-      foodprice: 249,
-      foodavailability: true,
+      foodPrice: 249,
+      foodAvailability: true,
     },
     {
       id: "3",
-      foodname: "Paneer Butter Masala",
-      foodimageurl: "/foodImages/paneer-butter-masala.jpg",
-      fooddescription:
+      foodName: "Paneer Butter Masala",
+      foodImageUrl: "/foodImages/paneer-butter-masala.jpg",
+      foodDescription:
         "Soft paneer cubes cooked in rich, creamy butter masala gravy.",
-      foodprice: 220,
-      foodavailability: true,
+      foodPrice: 220,
+      foodAvailability: true,
     },
     {
       id: "4",
-      foodname: "Masala Dosa",
-      foodimageurl: "/foodImages/dosa.jpg",
-      fooddescription:
+      foodName: "Masala Dosa",
+      foodImageUrl: "/foodImages/dosa.jpg",
+      foodDescription:
         "Crispy dosa filled with spiced mashed potatoes served with chutney and sambar.",
-      foodprice: 120,
-      foodavailability: true,
+      foodPrice: 120,
+      foodAvailability: true,
     },
     {
       id: "5",
-      foodname: "Chole Bhature",
-      foodimageurl: "/foodImages/chole-bhature.jpg",
-      fooddescription:
+      foodName: "Chole Bhature",
+      foodImageUrl: "/foodImages/chole-bhature.jpg",
+      foodDescription:
         "Spicy chickpea curry served with deep-fried fluffy bhature.",
-      foodprice: 150,
-      foodavailability: false, // maybe out of stock
+      foodPrice: 150,
+      foodAvailability: false, // maybe out of stock
     },
     {
       id: "6",
-      foodname: "Chocolate Brownie",
-      foodimageurl: "/foodImages/chocolate-brownie.jpg",
-      fooddescription: "Rich and fudgy chocolate brownie served warm.",
-      foodprice: 90,
-      foodavailability: true,
+      foodName: "Chocolate Brownie",
+      foodImageUrl: "/foodImages/chocolate-brownie.jpg",
+      foodDescription: "Rich and fudgy chocolate brownie served warm.",
+      foodPrice: 90,
+      foodAvailability: true,
     },
   ];
 
@@ -72,7 +74,7 @@ const InventoryManagement = () => {
             <div className="relative w-full h-52 md:h-64">
               {/* image */}
               <Image
-                src={item.foodimageurl}
+                src={item.foodImageUrl}
                 alt="Image"
                 fill // Next.js will use the parent div’s size
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -82,21 +84,14 @@ const InventoryManagement = () => {
             </div>
             <div className="p-4 flex flex-col gap-1">
               {/* bottom */}
-              <h1 className="font-semibold text-lg">{item.foodname}</h1>
+              <h1 className="font-semibold text-lg">{item.foodName}</h1>
               <h3 className="text-gray-400 line-clamp-2">
-                {item.fooddescription}
+                {item.foodDescription}
               </h3>
               <h3 className="flex justify-start items-center text-2xl font-bold">
-                <IndianRupee size={16} /> {item.foodprice}
+                <IndianRupee size={16} /> {item.foodPrice}
               </h3>
-              <div className="flex flex-row justify-between items-center mt-2 gap-2">
-                <button className="font-semibold font-mono bg-amber-400 text-gray-100 p-1 flex-1 rounded-full cursor-pointer">
-                  Edit
-                </button>
-                <button className="font-semibold font-mono bg-red-400 text-gray-100 p-1 flex-1 rounded-full cursor-pointer">
-                  Remove
-                </button>
-              </div>
+              <Actions data={item} />
             </div>
           </div>
         ))}
