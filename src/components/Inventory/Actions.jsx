@@ -1,6 +1,6 @@
 "use client";
-import InventoryModel from "./Model";
 import { useState } from "react";
+import InventoryUpdateModel from "./UpdateModel";
 const Actions = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
@@ -18,11 +18,10 @@ const Actions = ({ data }) => {
           Remove
         </button>
       </div>
-      <InventoryModel
-        type={"update"}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        modelDataObj={data}
+      <InventoryUpdateModel
+        updateModalVisible={isModalOpen}
+        setUpdateModalVisible={setIsModalOpen}
+        updateDataPayload={data}
       />
     </>
   );

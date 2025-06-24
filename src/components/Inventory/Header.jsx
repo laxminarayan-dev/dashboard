@@ -1,16 +1,10 @@
 "use client";
-import InventoryModel from "./Model";
+import InventoryAddModel from "./AddModel";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const modelDataObj = {
-    foodImageUrl: "",
-    foodName: "",
-    foodDescription: "",
-    foodPrice: "",
-  };
 
   return (
     <>
@@ -36,11 +30,9 @@ const Header = () => {
         </button>
       </div>
 
-      <InventoryModel
-        type={"add"}
+      <InventoryAddModel
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
-        modelDataObj={modelDataObj}
       />
     </>
   );

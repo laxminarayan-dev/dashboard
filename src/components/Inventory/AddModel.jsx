@@ -1,52 +1,27 @@
 import { X, CloudUpload } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
+import { useState, useEffect } from "react";
 
-const InventoryModel = ({
-  type,
-  isModalOpen,
-  setIsModalOpen,
-  modelDataObj,
-}) => {
-  const fileInputRef = useRef(null);
-  const isInitializing = useRef(false);
-
-  const [formData, setFormData] = useState(modelDataObj);
+const InventoryAddModel = ({ isModalOpen, setIsModalOpen }) => {
+  const [formData, setFormData] = useState({
+    foodImageUrl: "",
+    foodName: "",
+    foodDescription: "",
+    foodPrice: "",
+  });
   const [imagePreview, setImagePreview] = useState("");
 
-  // This effect correctly initializes the form state ONCE when the modal opens.
   useEffect(() => {
-    if (isModalOpen && !isInitializing.current) {
-      isInitializing.current = true;
-      setFormData(modelDataObj);
-      if (
-        typeof modelDataObj.foodImageUrl === "string" &&
-        modelDataObj.foodImageUrl
-      ) {
-        setImagePreview(modelDataObj.foodImageUrl);
-      } else {
-        setImagePreview("");
-      }
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
-    } else if (!isModalOpen && isInitializing.current) {
-      isInitializing.current = false;
+    if (!isModalOpen) {
+      setFormData({
+        foodImageUrl: "",
+        foodName: "",
+        foodDescription: "",
+        foodPrice: "",
+      });
+      setImagePreview(null);
     }
-  }, [isModalOpen, modelDataObj]);
-
-  // FIX: This effect handles memory management for blob URLs.
-  // It revokes the old blob URL whenever a new one is created or the component unmounts.
-  useEffect(() => {
-    const currentPreview = imagePreview;
-    // Cleanup function
-    return () => {
-      if (currentPreview && currentPreview.startsWith("blob:")) {
-        URL.revokeObjectURL(currentPreview);
-        console.log("CLEANUP: Revoked Blob URL:", currentPreview);
-      }
-    };
-  }, [imagePreview]);
+  }, [isModalOpen]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,9 +40,6 @@ const InventoryModel = ({
   const handleRemoveImage = () => {
     setImagePreview("");
     setFormData((prev) => ({ ...prev, foodImageUrl: "" }));
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   };
 
   const handleSubmit = (e) => {
@@ -89,7 +61,7 @@ const InventoryModel = ({
       <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative z-10">
         <div className="flex items-center justify-between pb-3 border-b border-gray-200">
           <h3 className="text-slate-900 text-xl font-semibold">
-            {type === "add" ? "Add New" : "Update"} Product
+            Add New Product
           </h3>
           <button onClick={() => setIsModalOpen(false)}>
             <X className="w-5 h-5 cursor-pointer text-gray-400 hover:text-red-500" />
@@ -105,12 +77,11 @@ const InventoryModel = ({
               <div className="relative p-4 min-h-[180px] flex flex-col items-center justify-center text-center">
                 <input
                   type="file"
-                  ref={fileInputRef}
                   id="chooseFile"
                   accept="image/*"
                   onChange={handleFileChange}
                   className="hidden"
-                  required={!formData.foodImageUrl}
+                  required
                 />
                 {!imagePreview && (
                   <label
@@ -135,13 +106,12 @@ const InventoryModel = ({
                       <X className="w-4 h-4 text-red-500" />
                     </button>
                     <div className="relative w-52 h-52">
-                      {/* FIX: Conditional rendering based on URL type */}
-                      <img
+                      <Image
                         src={imagePreview}
                         alt="Preview"
+                        fill
                         className="object-cover rounded w-full h-full"
                       />
-                      )
                     </div>
                   </>
                 )}
@@ -205,7 +175,7 @@ const InventoryModel = ({
               type="submit"
               className="w-full px-4 py-2 rounded-lg text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
             >
-              {type === "add" ? "Add" : "Update"} Product
+              Add Product
             </button>
           </div>
         </form>
@@ -214,4 +184,4 @@ const InventoryModel = ({
   );
 };
 
-export default InventoryModel;
+export default InventoryAddModel;
