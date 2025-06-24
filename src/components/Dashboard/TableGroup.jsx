@@ -109,7 +109,7 @@ const TableGroup = () => {
             <div key={table.title + index} className="bg-transparent">
               <div className="w-full shadow-sm bg-white p-6 rounded-lg">
                 <div className="w-full flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold ">{table.title}</h3>
+                  <h1 className="text-lg font-semibold ">{table.title}</h1>
                   <Link
                     className="text-blue-600 hover:text-blue-800 text-sm cursor-pointer font-medium"
                     href={table.path}

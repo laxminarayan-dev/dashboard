@@ -82,12 +82,12 @@ const Navbar = () => {
           <div className="flex w-full items-center justify-between">
             <div className="flex md:hidden">
               <button
+                aria-label="open-navbar"
                 onClick={() => setIsMobileSidebarOpen(true)}
                 type="button"
                 className="text-gray-500  hover:text-gray-600  focus:outline-none focus:text-gray-600 cursor-pointer"
               >
                 <Menu />
-                {""}
               </button>
             </div>
           </div>
@@ -105,6 +105,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center pr-2 text-slate-800 ">
             <Image src="/logo.png" width={70} height={70} alt="Logo" />
             <button
+              aria-label="close-sidebar"
               className="md:hidden text-slate-900 cursor-pointer"
               onClick={() => setIsMobileSidebarOpen(false)}
             >
