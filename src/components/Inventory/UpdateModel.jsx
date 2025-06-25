@@ -1,6 +1,6 @@
 import { X, CloudUpload } from "lucide-react";
 import { useState, useEffect } from "react";
-
+import Image from "next/image";
 const InventoryUpdateModel = ({
   updateModalVisible,
   setUpdateModalVisible,
@@ -107,16 +107,17 @@ const InventoryUpdateModel = ({
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Product Image
             </label>
-            <div className="rounded-lg border-2 border-gray-200 border-dashed mt-2">
-              <div className="relative p-4 min-h-[180px] flex flex-col items-center justify-center text-center">
-                <input
-                  type="file"
-                  id="updateChooseFile"
-                  accept="image/*"
-                  onChange={handleUpdateImageSelection}
-                  className="hidden"
-                />
-                {!updateImagePreviewUrl && (
+            <div className="flex flex-row-reverse justify-center items-center gap-4">
+              {/* Input */}
+              <div className="flex-1/2 rounded-lg border-2 border-gray-200 border-dashed mt-2">
+                <div className="relative p-4 min-h-[180px] flex flex-col items-center justify-center text-center">
+                  <input
+                    type="file"
+                    id="updateChooseFile"
+                    accept="image/*"
+                    onChange={handleUpdateImageSelection}
+                    className="hidden"
+                  />
                   <label
                     htmlFor="updateChooseFile"
                     className="w-full h-full min-h-[180px] flex flex-col justify-center items-center gap-4 cursor-pointer"
@@ -128,20 +129,24 @@ const InventoryUpdateModel = ({
                       upload
                     </h4>
                   </label>
-                )}
-                {updateImagePreviewUrl && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={handleUpdateImageRemoval}
-                      className="absolute top-2 right-2 z-10 bg-white rounded-full p-1 shadow-md hover:bg-gray-100"
-                    >
-                      <X className="w-4 h-4 text-red-500" />
-                    </button>
-                    <div className="relative w-52 h-52">
-                      <img
+                </div>
+              </div>
+              {/* preview */}
+              <div className="mt-2 flex-1/2 max-w-1/2">
+                <div className="relative min-h-[210px] max-h-[210px] border-2 border-dashed border-gray-200 rounded-lg">
+                  {updateImagePreviewUrl && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={handleUpdateImageRemoval}
+                        className="absolute top-2 right-2 z-10 bg-white rounded-full p-1 shadow-md hover:bg-gray-100"
+                      >
+                        <X className="w-4 h-4 text-red-500" />
+                      </button>
+                      <Image
                         src={updateImagePreviewUrl}
                         alt="Update Preview"
+                        fill
                         className="w-full h-full object-cover rounded"
                         onError={(e) => {
                           console.error(
@@ -151,9 +156,9 @@ const InventoryUpdateModel = ({
                           e.target.style.display = "none";
                         }}
                       />
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>
