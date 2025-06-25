@@ -28,7 +28,7 @@ const renderFields = ({ field, handleInputChange, formData }) => {
           <select
             id={field.name}
             name={field.name}
-            value={formData[field.name].toLowerCase()}
+            value={formData[field.name]}
             onChange={handleInputChange}
             required={field.required}
             className={commonInputClass}
