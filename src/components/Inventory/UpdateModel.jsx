@@ -133,7 +133,7 @@ const InventoryUpdateModel = ({
               </div>
               {/* preview */}
               <div className="mt-2 flex-1/2 max-w-1/2">
-                <div className="relative min-h-[210px] max-h-[210px] border-2 border-dashed border-gray-200 rounded-lg">
+                <div className="relative min-h-[210px] max-h-[210px] border-2 border-dashed border-gray-200 rounded-lg flex justify-center items-center">
                   {updateImagePreviewUrl && (
                     <>
                       <button
