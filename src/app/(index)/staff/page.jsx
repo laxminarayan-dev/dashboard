@@ -1,4 +1,5 @@
-import Header from "@/components/Staff/Header";
+import StaffActionButtons from "@/components/Staff/StaffActionButtons";
+import StaffHeader from "@/components/Staff/StaffHeader";
 
 const StaffManagement = () => {
   const workersTable = {
@@ -14,7 +15,7 @@ const StaffManagement = () => {
     ],
     tbody: [
       {
-        id: "1",
+        empId: "1",
         empName: "John Doe",
         dateOfJoin: "2023-01-15",
         salary: 50000,
@@ -24,7 +25,7 @@ const StaffManagement = () => {
         actions: <></>,
       },
       {
-        id: "2",
+        empId: "2",
         empName: "Jane Smith",
         dateOfJoin: "2022-05-20",
         salary: 60000,
@@ -34,7 +35,7 @@ const StaffManagement = () => {
         actions: <></>,
       },
       {
-        id: "3",
+        empId: "3",
         empName: "Amit Kumar",
         dateOfJoin: "2024-03-10",
         salary: 40000,
@@ -44,7 +45,7 @@ const StaffManagement = () => {
         actions: <></>,
       },
       {
-        id: "4",
+        empId: "4",
         empName: "Sara Lee",
         dateOfJoin: "2021-08-05",
         salary: 70000,
@@ -109,7 +110,7 @@ const StaffManagement = () => {
 
   return (
     <>
-      <Header fields={workersTable.fields} />
+      <StaffHeader fields={workersTable.fields} />
       {/* import ActionButtons from "./ActionButtons"; */}
       <div className="overflow-auto">
         <table className="min-w-full w-[35rem] bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden">
@@ -127,7 +128,7 @@ const StaffManagement = () => {
           </thead>
           <tbody className="whitespace-nowrap">
             {workersTable.tbody.map((tr, index) => (
-              <tr key={index + tr.id} className="hover:bg-gray-50">
+              <tr key={index + tr.empId} className="hover:bg-gray-50">
                 {Object.entries(tr).map(([key, value]) => {
                   if (key != "actions") {
                     return (
@@ -141,11 +142,11 @@ const StaffManagement = () => {
                   } else {
                     return (
                       <td key={key}>
-                        {/* <ActionButtons
-                          id={tr.id}
+                        <StaffActionButtons
+                          empId={tr.empId}
                           fields={workersTable.fields}
                           data={tr}
-                        /> */}
+                        />
                       </td>
                     );
                   }

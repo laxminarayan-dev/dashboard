@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
 
-const Header = ({ fields }) => {
+const StaffHeader = ({ fields }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({});
   const handleInputChange = (e) => {
@@ -93,4 +93,4 @@ const Header = ({ fields }) => {
   );
 };
 
-export default Header;
+export default StaffHeader;
