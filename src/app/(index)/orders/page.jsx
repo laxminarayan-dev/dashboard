@@ -1,5 +1,5 @@
 import OrderHeader from "@/components/Orders/OrderHeader";
-import OrderActionButton from "@/components/Orders/OrderActionButton";
+import OrderTable from "@/components/Orders/OrderTable";
 
 const OrdersHistory = () => {
   const ordersTable = {
@@ -131,51 +131,7 @@ const OrdersHistory = () => {
   return (
     <>
       <OrderHeader fields={ordersTable.fields} />
-
-      <div className="overflow-auto">
-        <table className="min-w-full w-[35rem] bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden">
-          <thead className="bg-gray-100 whitespace-nowrap">
-            <tr>
-              {ordersTable.thead.map((th, index) => (
-                <th
-                  key={th + index}
-                  className="p-4 text-left text-[13px] font-semibold text-slate-900"
-                >
-                  {th}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="whitespace-nowrap">
-            {ordersTable.tbody.map((tr, index) => (
-              <tr key={index + tr.orderId} className="hover:bg-gray-50">
-                {Object.entries(tr).map(([key, value]) => {
-                  if (key != "actions") {
-                    return (
-                      <td
-                        className="p-4 text-[15px] text-slate-600 font-medium"
-                        key={key}
-                      >
-                        {value}
-                      </td>
-                    );
-                  } else {
-                    return (
-                      <td key={key}>
-                        <OrderActionButton
-                          orderId={tr.orderId}
-                          fields={ordersTable.fields}
-                          data={tr}
-                        />
-                      </td>
-                    );
-                  }
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <OrderTable ordersTable={ordersTable} showActions={true} />
     </>
   );
 };
