@@ -10,6 +10,7 @@ const InventoryAddModel = ({ isModalOpen, setIsModalOpen }) => {
     foodPrice: "",
   });
   const [imagePreview, setImagePreview] = useState("");
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   useEffect(() => {
     if (!isModalOpen) {
@@ -22,6 +23,11 @@ const InventoryAddModel = ({ isModalOpen, setIsModalOpen }) => {
       setImagePreview(null);
     }
   }, [isModalOpen]);
+  useEffect(() => {
+    if (imagePreview) {
+      setIsImageLoading(false);
+    }
+  }, [imagePreview]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +35,7 @@ const InventoryAddModel = ({ isModalOpen, setIsModalOpen }) => {
   };
 
   const handleFileChange = (e) => {
+    setIsImageLoading(true);
     const file = e.target.files[0];
     if (file) {
       const newPreviewUrl = URL.createObjectURL(file);
@@ -73,17 +80,17 @@ const InventoryAddModel = ({ isModalOpen, setIsModalOpen }) => {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Product Image
             </label>
-            <div className="rounded-lg border-2 border-gray-200 border-dashed mt-2">
-              <div className="relative p-4 min-h-[180px] flex flex-col items-center justify-center text-center">
-                <input
-                  type="file"
-                  id="chooseFile"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  className="hidden"
-                  required
-                />
-                {!imagePreview && (
+            <div className="flex flex-row-reverse justify-center items-center gap-4">
+              <div className="rounded-lg border-2 border-gray-200 border-dashed mt-2">
+                <div className="relative p-4 min-h-[180px] flex flex-col items-center justify-center text-center">
+                  <input
+                    type="file"
+                    id="chooseFile"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    required
+                  />
                   <label
                     htmlFor="chooseFile"
                     className="w-full h-full min-h-[180px] flex flex-col justify-center items-center gap-4 cursor-pointer"
@@ -95,26 +102,35 @@ const InventoryAddModel = ({ isModalOpen, setIsModalOpen }) => {
                       upload
                     </h4>
                   </label>
-                )}
-                {imagePreview && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={handleRemoveImage}
-                      className="absolute top-2 right-2 z-10 bg-white rounded-full p-1 shadow-md"
-                    >
-                      <X className="w-4 h-4 text-red-500" />
-                    </button>
-                    <div className="relative w-52 h-52">
-                      <Image
-                        src={imagePreview}
-                        alt="Preview"
-                        fill
-                        className="object-cover rounded w-full h-full"
-                      />
+                </div>
+              </div>
+              <div className="flex-1/2 max-w-1/2">
+                <div className="min-h-[210px] max-h-[210px] border-2 border-dashed border-gray-200 mt-2 rounded-lg relative flex justify-center items-center">
+                  {!isImageLoading && imagePreview && (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={handleRemoveImage}
+                        className="absolute top-2 right-2 z-10 bg-white rounded-full p-1 shadow-md"
+                      >
+                        <X className="w-4 h-4 text-red-500" />
+                      </button>
+                      <div>
+                        <Image src={imagePreview} alt="Preview" fill />
+                      </div>
                     </div>
-                  </>
-                )}
+                  )}
+                  {!isImageLoading && !imagePreview && (
+                    <h1 className="text-sm text-red-500">
+                      No Preview Available
+                    </h1>
+                  )}
+                  {isImageLoading && (
+                    <>
+                      <div className="animate-spin w-10 h-10 border-gray-900 border-2 rounded-full border-r-0 border-t-0"></div>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>
