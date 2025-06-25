@@ -20,9 +20,7 @@ const OrderHeader = ({ fields }) => {
   return (
     <>
       <div>
-        <h1 className="text-3xl my-2 text-gray-800 font-bold">
-          Staff Order Details
-        </h1>
+        <h1 className="text-3xl my-2 text-gray-800 font-bold">Order Details</h1>
         <p className="text-gray-600 text-sm mb-4">Manage your Orders here.</p>
       </div>
       <div className="flex items-center justify-between mb-4">
