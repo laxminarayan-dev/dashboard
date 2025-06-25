@@ -158,6 +158,11 @@ const InventoryUpdateModel = ({
                       />
                     </>
                   )}
+                  {!updateImagePreviewUrl && (
+                    <h1 className="text-sm text-red-500">
+                      No Preview Available
+                    </h1>
+                  )}
                 </div>
               </div>
             </div>
