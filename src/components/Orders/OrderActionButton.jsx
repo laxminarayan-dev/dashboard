@@ -14,6 +14,7 @@ const OrderActionButton = ({ empId, fields, data }) => {
     <>
       <div className="flex flex-row justify-start items-center gap-2 px-4">
         <button
+          aria-label="updateEntry"
           type="button"
           onClick={() => {
             setIsModalOpen(true);
@@ -22,6 +23,7 @@ const OrderActionButton = ({ empId, fields, data }) => {
           <Pencil className="inline-block w-4 h-4 text-blue-500 cursor-pointer mr-2" />
         </button>
         <button
+          aria-label="deleteEntry"
           type="button"
           onClick={() => {
             console.log(empId);
