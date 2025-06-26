@@ -85,9 +85,9 @@ const InventoryManagement = () => {
             <div className="p-4 flex flex-col gap-1">
               {/* bottom */}
               <h1 className="font-semibold text-lg">{item.foodName}</h1>
-              <h3 className="text-gray-400 line-clamp-2">
+              <h2 className="text-gray-700 line-clamp-2">
                 {item.foodDescription}
-              </h3>
+              </h2>
               <h3 className="flex justify-start items-center text-2xl font-bold">
                 <IndianRupee size={16} /> {item.foodPrice}
               </h3>
