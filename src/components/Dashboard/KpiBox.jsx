@@ -1,33 +1,9 @@
 import { IndianRupee, ShoppingCart, Users } from "lucide-react";
-const KPIBoxGroup = () => {
-  const kpiBoxes = [
-    {
-      title: "Today's Revenue",
-      counts: "₹2,847",
-      subTitle: "+12.5%",
-      color: "text-stone-600",
-      icon: <IndianRupee className="h-8 w-8 text-green-500" />,
-    },
-    {
-      title: "Orders Completed",
-      counts: "47",
-      subTitle: "+8.2%",
-      color: "text-stone-600",
-      icon: <ShoppingCart className="h-8 w-8 text-blue-500" />,
-    },
-    {
-      title: "Customer Count",
-      counts: "156",
-      subTitle: "23 new",
-      color: "text-stone-600",
-      icon: <Users className="h-8 w-8 text-orange-500" />,
-    },
-  ];
-
+const KPIBoxGroup = async ({ kpiData }) => {
   return (
     <div className="mb-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-5">
-        {kpiBoxes.map((box, index) => (
+        {kpiData.map((box, index) => (
           <div
             key={index + box.title}
             className="bg-white dar p-6 rounded-lg shadow-sm border border-slate-300"
@@ -45,7 +21,13 @@ const KPIBoxGroup = () => {
                   <span className={`text-sm ${box.color}`}>{box.subTitle}</span>
                 </div>
               </div>
-              {box.icon}
+              {box.icon == "IndianRupee" ? (
+                <IndianRupee className="h-8 w-8 text-green-500" />
+              ) : box.icon == "ShoppingCart" ? (
+                <ShoppingCart className="h-8 w-8 text-blue-500" />
+              ) : (
+                <Users className="h-8 w-8 text-orange-500" />
+              )}
             </div>
           </div>
         ))}

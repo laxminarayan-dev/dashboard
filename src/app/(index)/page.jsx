@@ -2,7 +2,17 @@ import KPIBoxGroup from "@/components/Dashboard/KpiBox";
 import ChartGroup from "@/components/Charts/ChartGroup";
 import TableGroup from "@/components/Dashboard/TableGroup";
 
-export default function Home() {
+const Home = async () => {
+  "use server";
+  const res = await fetch("http://localhost:8000/api/dashboard-data", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+
+  const data = await res.json();
   return (
     <>
       <div className=" w-full flex-col scroll-smooth justify-center items-center flex-1 bg-transparent">
@@ -11,10 +21,11 @@ export default function Home() {
           Welcome to your dashboard. Here you can find an overview of your
           performance.
         </p>
-        <KPIBoxGroup />
-        <ChartGroup />
-        <TableGroup />
+        <KPIBoxGroup kpiData={data.kpiData} />
+        <ChartGroup chartData={data.chartData} />
+        <TableGroup tablesData={data.tablesData} />
       </div>
     </>
   );
-}
+};
+export default Home;
