@@ -101,7 +101,7 @@ const MenuManagement = () => {
                 <button
                   className={`${
                     !item.foodAvailability && "bg-red-300"
-                  }  rounded-full px-4 py-1 cursor-pointer`}
+                  }  rounded-full px-2 py-1 cursor-pointer`}
                   aria-label="unavailable"
                 >
                   Unavailable
@@ -109,7 +109,7 @@ const MenuManagement = () => {
                 <button
                   className={`${
                     item.foodAvailability && "bg-green-300"
-                  }  rounded-full px-4 py-1 cursor-pointer`}
+                  }  rounded-full px-2 py-1 cursor-pointer`}
                   aria-label="available"
                 >
                   Available
