@@ -97,11 +97,11 @@ const MenuManagement = () => {
               <h3 className="flex justify-start items-center text-2xl font-bold">
                 <IndianRupee size={16} /> {item.foodPrice}
               </h3>
-              <div className="w-fit border border-stone-200 bg-gray-50 shadow-xs p-1 rounded-full gap-2 flex justify-center items-center">
+              <div className="w-fit border border-stone-200 bg-gray-50 shadow-xs p-1 rounded-full gap-2 flex ">
                 <button
                   className={`${
                     !item.foodAvailability && "bg-red-300"
-                  }  rounded-full px-2 py-1 text-sm cursor-pointer`}
+                  }  rounded-full px-3 py-1 text-sm cursor-pointer`}
                   aria-label="unavailable"
                 >
                   Unavailable
@@ -109,7 +109,7 @@ const MenuManagement = () => {
                 <button
                   className={`${
                     item.foodAvailability && "bg-green-300"
-                  }  rounded-full px-2 py-1 text-sm cursor-pointer`}
+                  }  rounded-full px-3 py-1 text-sm cursor-pointer`}
                   aria-label="available"
                 >
                   Available
