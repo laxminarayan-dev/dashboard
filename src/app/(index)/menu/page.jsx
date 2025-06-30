@@ -97,7 +97,7 @@ const MenuManagement = () => {
               <h3 className="flex justify-start items-center text-2xl font-bold">
                 <IndianRupee size={16} /> {item.foodPrice}
               </h3>
-              <div className="w-fit border border-stone-200 bg-gray-50 shadow-xs p-1 rounded-full gap-2 flex">
+              <div className="w-fit border border-stone-200 bg-gray-50 shadow-xs p-1 rounded-full gap-2 flex justify-center items-center">
                 <button
                   className={`${
                     !item.foodAvailability && "bg-red-300"
