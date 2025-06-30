@@ -113,7 +113,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="flex flex-col justify-between flex-1  overflow-auto">
+          <div className="flex flex-col justify-between flex-1 min-h-fit overflow-auto">
             <nav className="mx-1 space-y-6 ">
               {sidebarItems.map((section, index) => (
                 <div key={section.title + index} className="space-y-3 ">
