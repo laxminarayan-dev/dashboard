@@ -100,7 +100,7 @@ const Navbar = () => {
         <div
           className={`fixed z-101 top-0 left-0 min-h-screen border-r border-slate-300 p-4 transition-transform duration-300 ease-in-out
           ${isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0 md:block md:w-64 h-screen bg-white text-slate-900  w-64 rounded-br-xl rounded-tr-xl md:rounded-none`}
+          md:translate-x-0 md:block md:w-64 h-screen bg-white text-slate-900  w-64 rounded-br-xl rounded-tr-xl md:rounded-none overflow-auto`}
         >
           <div className="flex justify-between items-center pr-2 text-slate-800 ">
             <Image src="/logo.png" width={70} height={70} alt="Logo" />
@@ -113,7 +113,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="flex flex-col justify-between flex-1 min-h-fit overflow-auto">
+          <div className="flex flex-col justify-between flex-1">
             <nav className="mx-1 space-y-6 ">
               {sidebarItems.map((section, index) => (
                 <div key={section.title + index} className="space-y-3 ">
