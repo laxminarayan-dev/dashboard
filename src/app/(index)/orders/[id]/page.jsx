@@ -1,10 +1,9 @@
-"use client"; // if you're using Next.js app directory
-
 import { CheckCircle, CreditCard, MapPin, Clock } from "lucide-react";
+import OrderActionButton from "@/components/Orders/OrderActionButton";
 
 const Order = ({ params }) => {
   return (
-    <div className=" p-6 max-w-2xl w-full">
+    <div className="p-6 max-w-2xl w-full">
       <h2 className="text-3xl font-bold text-indigo-700 mb-4 border-b pb-2">
         🧾 Order Summary
       </h2>
@@ -71,6 +70,9 @@ const Order = ({ params }) => {
           </div>
         </div>
       </div>
+
+      {/* Buttons */}
+      <OrderActionButton />
     </div>
   );
 };
