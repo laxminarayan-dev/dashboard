@@ -10,9 +10,36 @@ const OrderActionButton = ({ empId, fields, data }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  const handleUpdate = () => {
+    console.log("Update order:", params.id);
+    // You can route to update form or open a modal
+  };
+
+  const handleDelete = () => {
+    console.log("Delete order:", params.id);
+    // Confirm and send delete request
+  };
   return (
     <>
-      <div className="flex flex-row justify-start items-center gap-2 px-4">
+      <div className="w-full flex gap-4 mt-6">
+        <button
+          onClick={handleUpdate}
+          className="flex flex-1 items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all"
+        >
+          <Pencil className="w-4 h-4" />
+          Update Details
+        </button>
+
+        <button
+          onClick={handleDelete}
+          className="flex flex-1 items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all"
+        >
+          <Trash className="w-4 h-4" />
+          Delete Details
+        </button>
+      </div>
+
+      {/* <div className="flex flex-row justify-start items-center gap-2 px-4">
         <button
           aria-label="updateEntry"
           type="button"
@@ -31,7 +58,7 @@ const OrderActionButton = ({ empId, fields, data }) => {
         >
           <Trash className="inline-block w-4 h-4 text-red-500 cursor-pointer" />
         </button>
-      </div>
+      </div> */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-[1000] overflow-auto bg-black bg-opacity-50 p-4"
