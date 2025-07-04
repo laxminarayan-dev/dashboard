@@ -7,36 +7,35 @@ const Order = ({ params }) => {
 
       <div className="text-gray-700 space-y-1">
         <p>
-          <span className="font-medium">Order ID:</span> {params.id}
+          <span className="font-bold">Order ID:</span> {params.id}
         </p>
         <p>
-          <span className="font-medium">Ordered By:</span> Lucky Jaiswal
+          <span className="font-bold">Ordered By:</span> Lucky Jaiswal
         </p>
         <p>
-          <span className="font-medium">Food Item:</span> Cake
+          <span className="font-bold">Food Item:</span> Cake
         </p>
         <p>
-          <span className="font-medium">Quantity:</span> 2
+          <span className="font-bold">Quantity:</span> 2
         </p>
         <p>
-          <span className="font-medium">Order Time:</span> 23-03-2025 00:12 AM
+          <span className="font-bold">Order Time:</span> 23-03-2025 00:12 AM
         </p>
         <p>
-          <span className="font-medium">Total:</span> ₹5000
+          <span className="font-bold">Total:</span> ₹5000
         </p>
         <p>
-          <span className="font-medium">Status:</span>{" "}
-          <span className="text-green-600 font-semibold">Delivered</span>
+          <span className="font-bold">Status:</span>
+          <span className="text-green-600 font-semibold"> Delivered</span>
         </p>
         <p>
-          <span className="font-medium">Payment Method:</span> Credit Card
+          <span className="font-bold">Payment Method:</span> Credit Card
         </p>
         <p>
-          <span className="font-medium">Delivery Time:</span> 23-03-2025 00:22
-          AM
+          <span className="font-bold">Delivery Time:</span> 23-03-2025 00:22 AM
         </p>
         <p>
-          <span className="font-medium">Location:</span>
+          <span className="font-bold">Location:</span>
           <br />
           <span className="block text-sm text-gray-600">
             227K, Karm Dharm, Narora <br />
