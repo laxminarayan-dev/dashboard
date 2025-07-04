@@ -3,18 +3,13 @@ import { Pencil, Trash, X } from "lucide-react";
 import { useState } from "react";
 import RenderFields from "../Shared/RenderFields";
 
-const OrderActionButton = ({ empId, fields, data }) => {
+const OrderActionButton = ({ orderId = "", fields = [], data = [] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(data);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleUpdate = () => {
-    console.log("Update order:", params.id);
-    // You can route to update form or open a modal
-  };
-
   const handleDelete = () => {
     console.log("Delete order:", params.id);
     // Confirm and send delete request
@@ -23,7 +18,9 @@ const OrderActionButton = ({ empId, fields, data }) => {
     <>
       <div className="w-full flex gap-4 mt-6">
         <button
-          onClick={handleUpdate}
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
           className="flex flex-1 items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all"
         >
           <Pencil className="w-4 h-4" />
@@ -43,9 +40,7 @@ const OrderActionButton = ({ empId, fields, data }) => {
         <button
           aria-label="updateEntry"
           type="button"
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
+          
         >
           <Pencil className="inline-block w-4 h-4 text-blue-500 cursor-pointer mr-2" />
         </button>
@@ -53,7 +48,7 @@ const OrderActionButton = ({ empId, fields, data }) => {
           aria-label="deleteEntry"
           type="button"
           onClick={() => {
-            console.log(empId);
+            console.log(orderId);
           }}
         >
           <Trash className="inline-block w-4 h-4 text-red-500 cursor-pointer" />
