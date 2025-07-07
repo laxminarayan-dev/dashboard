@@ -1,11 +1,15 @@
 "use client";
 import { Pencil, Trash, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RenderFields from "../Shared/RenderFields";
 
-const OrderActionButton = ({ data }) => {
+const OrderActionButton = ({ data, onOrderUpdate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(data);
+  useEffect(() => {
+    setFormData(data);
+  }, [isModalOpen]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -74,6 +78,27 @@ const OrderActionButton = ({ data }) => {
       required: false,
     },
   ];
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:8000/api/updateOrder/${data.orderId}`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert("Update Successful");
+        setIsModalOpen(false);
+        if (onOrderUpdate) onOrderUpdate(result.orderId);
+      })
+      .catch((error) => {
+        alert("Error updating order");
+      });
+  };
+
   return (
     <>
       <div className="w-full flex gap-4 mt-6">
@@ -118,13 +143,13 @@ const OrderActionButton = ({ data }) => {
               />
             </div>
 
-            <form className="mt-6 space-y-4">
+            <form className="mt-6 space-y-4" onSubmit={handleUpdate}>
               {fields.map((field, index) => (
                 <RenderFields
                   key={index}
                   field={field}
                   handleInputChange={handleInputChange}
-                  formData={data}
+                  formData={formData}
                 />
               ))}
               <div className="border-t border-gray-200 pt-6 flex gap-4">

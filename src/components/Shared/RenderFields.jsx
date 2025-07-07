@@ -9,8 +9,6 @@ const renderFields = ({ field, handleInputChange, formData }) => {
   const commonInputClass =
     "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500";
 
-  console.log(field.name, formData[field.name]);
-
   const label = (
     <label
       htmlFor={field.name}
