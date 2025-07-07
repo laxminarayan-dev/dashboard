@@ -3,7 +3,7 @@ import { Pencil, Trash, X } from "lucide-react";
 import { useState } from "react";
 import RenderFields from "../Shared/RenderFields";
 
-const OrderActionButton = ({ orderId = "", fields = [], data = [] }) => {
+const OrderActionButton = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(data);
   const handleInputChange = (e) => {
@@ -11,9 +11,69 @@ const OrderActionButton = ({ orderId = "", fields = [], data = [] }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   const handleDelete = () => {
-    console.log("Delete order:", params.id);
-    // Confirm and send delete request
+    console.log("Delete order:");
   };
+  const fields = [
+    {
+      name: "customerName",
+      label: "Customer Name",
+      type: "text",
+      required: true,
+      placeholder: "Enter Customer Name",
+    },
+    {
+      name: "orderItem",
+      label: "Order Item",
+      type: "text",
+      required: true,
+      placeholder: "Enter Item Name",
+    },
+    {
+      name: "quantity",
+      label: "Quantity",
+      type: "number",
+      required: true,
+      min: "1",
+      step: "1",
+      placeholder: "Enter Quantity",
+    },
+    {
+      name: "orderDateTime",
+      label: "Order Date & Time",
+      type: "datetime-local",
+      required: true,
+    },
+    {
+      name: "amount",
+      label: "Amount",
+      type: "number",
+      required: true,
+      placeholder: "0.00",
+      step: "1",
+      min: "0",
+      prefix: "₹",
+    },
+    {
+      name: "status",
+      label: "Status",
+      type: "select",
+      required: true,
+      options: ["Pending", "Shipped", "Delivered", "Cancelled"],
+    },
+    {
+      name: "paymentMethod",
+      label: "Payment Method",
+      type: "select",
+      required: true,
+      options: ["Cash on Delivery", "Credit Card", "UPI", "Net Banking"],
+    },
+    {
+      name: "deliveredDateTime",
+      label: "Delivered Date & Time",
+      type: "datetime-local",
+      required: false,
+    },
+  ];
   return (
     <>
       <div className="w-full flex gap-4 mt-6">
@@ -36,24 +96,6 @@ const OrderActionButton = ({ orderId = "", fields = [], data = [] }) => {
         </button>
       </div>
 
-      {/* <div className="flex flex-row justify-start items-center gap-2 px-4">
-        <button
-          aria-label="updateEntry"
-          type="button"
-          
-        >
-          <Pencil className="inline-block w-4 h-4 text-blue-500 cursor-pointer mr-2" />
-        </button>
-        <button
-          aria-label="deleteEntry"
-          type="button"
-          onClick={() => {
-            console.log(orderId);
-          }}
-        >
-          <Trash className="inline-block w-4 h-4 text-red-500 cursor-pointer" />
-        </button>
-      </div> */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-[1000] overflow-auto bg-black bg-opacity-50 p-4"
@@ -82,7 +124,7 @@ const OrderActionButton = ({ orderId = "", fields = [], data = [] }) => {
                   key={index}
                   field={field}
                   handleInputChange={handleInputChange}
-                  formData={formData}
+                  formData={data}
                 />
               ))}
               <div className="border-t border-gray-200 pt-6 flex gap-4">

@@ -12,7 +12,7 @@ const OrdersHistory = () => {
       "Amount",
       "Status",
       "Payment Method",
-      "Delivered On & Time",
+      "Delivered Date & Time",
       "Actions",
     ],
     tbody: [
@@ -120,8 +120,8 @@ const OrdersHistory = () => {
         options: ["Cash on Delivery", "Credit Card", "UPI", "Net Banking"],
       },
       {
-        name: "deliveredOnTime",
-        label: "Delivered On & Time",
+        name: "deliveredDateTime",
+        label: "Delivered Date & Time",
         type: "datetime-local",
         required: false,
       },
