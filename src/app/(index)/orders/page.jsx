@@ -1,7 +1,13 @@
 import OrderHeader from "@/components/Orders/OrderHeader";
 import OrderTable from "@/components/Orders/OrderTable";
 
-const OrdersHistory = () => {
+const OrdersHistory = async () => {
+  "use server";
+  const res = await fetch(`http://localhost:8000/api/orders-all`, {
+    method: "POST",
+    cache: "no-store",
+  });
+  const result = await res.json();
   const ordersTable = {
     thead: [
       "Order ID",
@@ -15,56 +21,7 @@ const OrdersHistory = () => {
       "Delivered Date & Time",
       "Actions",
     ],
-    tbody: [
-      {
-        orderId: "101",
-        customerName: "Alice Johnson",
-        orderItem: "Chocolate Cake",
-        quantity: 2,
-        orderDateTime: "2025-06-10T14:30",
-        amount: 1500,
-        status: "Delivered",
-        paymentMethod: "Credit Card",
-        deliveredOnTime: "2025-06-12T10:00",
-        actions: <></>,
-      },
-      {
-        orderId: "102",
-        customerName: "Bob Smith",
-        orderItem: "Veg Pizza",
-        quantity: 1,
-        orderDateTime: "2025-06-12T09:15",
-        amount: 2500,
-        status: "Pending",
-        paymentMethod: "Cash on Delivery",
-        deliveredOnTime: "",
-        actions: <></>,
-      },
-      {
-        orderId: "103",
-        customerName: "Charlie Lee",
-        orderItem: "Pasta",
-        quantity: 3,
-        orderDateTime: "2025-06-15T16:45",
-        amount: 1800,
-        status: "Shipped",
-        paymentMethod: "UPI",
-        deliveredOnTime: "",
-        actions: <></>,
-      },
-      {
-        orderId: "104",
-        customerName: "Diana Prince",
-        orderItem: "Burger",
-        quantity: 4,
-        orderDateTime: "2025-06-18T11:00",
-        amount: 3200,
-        status: "Delivered",
-        paymentMethod: "Net Banking",
-        deliveredOnTime: "2025-06-20T13:20",
-        actions: <></>,
-      },
-    ],
+
     fields: [
       {
         name: "customerName",
@@ -131,7 +88,7 @@ const OrdersHistory = () => {
   return (
     <>
       <OrderHeader fields={ordersTable.fields} />
-      <OrderTable ordersTable={ordersTable} showActions={true} />
+      <OrderTable ordersTable={ordersTable} data={result} showActions={true} />
     </>
   );
 };

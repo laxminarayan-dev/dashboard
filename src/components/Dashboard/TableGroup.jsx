@@ -2,7 +2,23 @@
 import Link from "next/link";
 import OrderTable from "@/components/Orders/OrderTable";
 import TransactionTable from "@/components/Transactions/TransactionTable";
+import { useEffect, useState } from "react";
 const TableGroup = ({ tablesData }) => {
+  const [orderData, setOrderData] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:8000/api/orders-all", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    })
+      .then((res) => res.json()) // Parse JSON from response
+      .then((data) => {
+        setOrderData(data); // This will log the actual order data array
+      });
+  }, []);
+
   return (
     <>
       <div>
@@ -16,7 +32,10 @@ const TableGroup = ({ tablesData }) => {
               View All
             </Link>
           </div>
-          <OrderTable ordersTable={tablesData.recentOrdersData} />
+          <OrderTable
+            ordersTable={tablesData.recentOrdersData}
+            data={orderData}
+          />
         </div>
         <div className="grid grid-cols-1  gap-2 px-5 my-8">
           <div className="w-full flex items-center justify-between ">

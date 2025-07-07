@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 // import OrderActionButton from "@/components/Orders/OrderActionButton";
-const OrderTable = ({ ordersTable, showActions = false }) => {
+const OrderTable = ({ ordersTable, data, showActions = false }) => {
   const router = useRouter();
   return (
     <div className="overflow-auto">
@@ -37,7 +37,7 @@ const OrderTable = ({ ordersTable, showActions = false }) => {
           </tr>
         </thead>
         <tbody className="whitespace-nowrap">
-          {ordersTable.tbody.map((tr, index) => (
+          {data.map((tr, index) => (
             <tr key={index + tr.orderId} className="hover:bg-gray-50">
               {/* {Object.entries(tr).map(([key, value]) => { */}
               {/* if (key != "actions") { */}
