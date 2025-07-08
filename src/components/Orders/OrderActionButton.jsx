@@ -1,9 +1,11 @@
 "use client";
 import { Pencil, Trash, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import RenderFields from "../Shared/RenderFields";
 
 const OrderActionButton = ({ data, onOrderUpdate }) => {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(data);
   useEffect(() => {
@@ -14,9 +16,7 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleDelete = () => {
-    console.log("Delete order:");
-  };
+
   const fields = [
     {
       name: "customerName",
@@ -97,6 +97,17 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
       .catch((error) => {
         alert("Error updating order");
       });
+  };
+
+  const handleDelete = () => {
+    fetch(`http://localhost:8000/api/orderDelete/${data.orderId}`, {
+      method: "POST",
+    }).then((res) => {
+      console.log(res.status);
+      if (res.status == 200) {
+        router.back();
+      }
+    });
   };
 
   return (
