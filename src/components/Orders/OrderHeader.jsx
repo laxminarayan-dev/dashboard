@@ -4,7 +4,6 @@ import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
 
 const OrderHeader = ({ fields, onAddData }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const initialData = {
     amount: 0,
     customerName: "",
@@ -16,6 +15,10 @@ const OrderHeader = ({ fields, onAddData }) => {
     quantity: 0,
     status: "Pending",
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState(initialData);
+
+  // generate method
   const generateOrderId = (prefix = "ORD") => {
     const timestamp = Date.now().toString(36).toUpperCase(); // e.g. "LTS3D0"
     const random = Math.floor(Math.random() * 36 ** 2)
@@ -27,7 +30,7 @@ const OrderHeader = ({ fields, onAddData }) => {
     return prefix + id;
   };
 
-  const [formData, setFormData] = useState(initialData);
+  // input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -38,6 +41,7 @@ const OrderHeader = ({ fields, onAddData }) => {
     }));
   };
 
+  // add item
   const handleSubmit = (e) => {
     e.preventDefault();
     const orderId = generateOrderId();
@@ -59,6 +63,7 @@ const OrderHeader = ({ fields, onAddData }) => {
       }
     });
   };
+
   return (
     <>
       <div>

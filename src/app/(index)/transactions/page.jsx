@@ -84,7 +84,10 @@ const TransactionsHistory = () => {
 
   return (
     <>
-      <TransactionHeader fields={transactionsTable.fields} />
+      <TransactionHeader
+        fields={transactionsTable.fields}
+        onAddData={fetchData}
+      />
       <TransactionTable data={data} />
     </>
   );

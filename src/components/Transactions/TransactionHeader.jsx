@@ -3,18 +3,61 @@ import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
 
-const TransactionHeader = ({ fields }) => {
+const TransactionHeader = ({ fields, onAddData }) => {
+  const initialData = {
+    amount: 0,
+    transactionId: "",
+    status: "Successful",
+    transactionDateTime: "",
+    method: "Cash",
+    reference: "",
+    type: "Credit",
+    userName: "",
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState(initialData);
+
+  const generateTransactionId = (prefix = "TRN") => {
+    const timestamp = Date.now().toString(36).toUpperCase(); // e.g. "LTS3D0"
+    const random = Math.floor(Math.random() * 36 ** 2)
+      .toString(36)
+      .toUpperCase(); // e.g. "A9"
+
+    // Take last 3 from timestamp and 2 from random (or adjust as needed)
+    const id = (timestamp.slice(-3) + random).slice(0, 5).padStart(5, "0");
+    return prefix + id;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ["amount"].includes(name) ? parseInt(value, 10) || 0 : value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsModalOpen(false);
+    const transactionId = generateTransactionId();
+    const objBody = { ...formData, transactionId };
+    fetch("http://localhost:8000/api/transactions/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(objBody),
+    }).then((res) => {
+      if (res.status == 200) {
+        alert("Transaction Entry Added Successfully");
+        setIsModalOpen(false);
+        setFormData(initialData);
+        onAddData();
+      } else {
+        alert("Transaction Entry Added Failed");
+      }
+    });
   };
+
   return (
     <>
       <div>
