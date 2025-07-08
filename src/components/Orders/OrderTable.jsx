@@ -1,18 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-// import OrderActionButton from "@/components/Orders/OrderActionButton";
-const OrderTable = ({ ordersTable, data, showActions = false }) => {
+const OrderTable = ({ data }) => {
   const router = useRouter();
   return (
     <div className="overflow-auto">
-      <table className="min-w-full w-[35rem] bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden">
+      <table className="min-w-[fit-content]  bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden">
         <thead className="bg-gray-100 whitespace-nowrap">
           <tr>
-            {/* {ordersTable.thead.map((th, index) => { */}
-            {/* if (th == "Actions" && showActions == false) { */}
-            {/* return; */}
-            {/* } else { */}
-            {/* return ( */}
             <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
               Order Id
             </th>
@@ -31,17 +25,11 @@ const OrderTable = ({ ordersTable, data, showActions = false }) => {
             <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
               More Details
             </th>
-            {/* ); */}
-            {/* } */}
-            {/* })} */}
           </tr>
         </thead>
         <tbody className="whitespace-nowrap">
           {data.map((tr, index) => (
             <tr key={index + tr.orderId} className="hover:bg-gray-50">
-              {/* {Object.entries(tr).map(([key, value]) => { */}
-              {/* if (key != "actions") { */}
-              {/* return ( */}
               <td className="p-4 text-[15px] text-slate-600 font-medium">
                 {tr.orderId}
               </td>
@@ -68,23 +56,6 @@ const OrderTable = ({ ordersTable, data, showActions = false }) => {
                   Other Details
                 </button>
               </td>
-
-              {/* ); */}
-              {/* } */}
-              {/* else if (key == "actions" && showActions) { */}
-              {/* return ( */}
-              {/* <td key={key}> */}
-              {/* <OrderActionButton */}
-              {/* orderId={tr.orderId} */}
-              {/* fields={ordersTable.fields} */}
-              {/* data={tr} */}
-              {/* /> */}
-              {/* </td> */}
-              {/* ); */}
-              {/* } */}
-              {/* } */}
-              {/* ) */}
-              {/* } */}
             </tr>
           ))}
         </tbody>

@@ -65,7 +65,7 @@ const OrderHeader = ({ fields, onAddData }) => {
         <h1 className="text-3xl my-2 text-gray-800 font-bold">Order Details</h1>
         <p className="text-gray-600 text-sm mb-4">Manage your Orders here.</p>
       </div>
-      <div className="flex items-center justify-between mb-4">
+      <div className="max-w-[38rem] flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Order Entries</h1>
         <button
           onClick={() => {

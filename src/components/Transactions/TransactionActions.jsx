@@ -1,35 +1,138 @@
 "use client";
 import { Pencil, Trash, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RenderFields from "../Shared/RenderFields";
+import { useRouter } from "next/navigation";
 
-const TransactionActions = ({ transactionId, fields, data }) => {
+const TransactionActions = ({ data, onTransactionUpdate }) => {
+  const router = useRouter();
+  const initialData = {
+    amount: 0,
+    transactionId: "",
+    status: "",
+    transactionDateTime: "",
+    method: "",
+    reference: "",
+    type: "",
+    userName: "",
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState(data);
+  const [formData, setFormData] = useState(initialData);
+  const fields = [
+    {
+      name: "userName",
+      label: "Payer / Recipient  Name",
+      type: "text",
+      required: true,
+      placeholder: "Enter Payer / Recipient Name",
+    },
+    {
+      name: "transactionDateTime",
+      label: "Transaction Date & Time",
+      type: "datetime-local",
+      required: true,
+    },
+    {
+      name: "amount",
+      label: "Amount",
+      type: "number",
+      required: true,
+      placeholder: "0.00",
+      step: "1",
+      min: "0",
+      prefix: "₹",
+    },
+    {
+      name: "type",
+      label: "Type",
+      type: "select",
+      required: true,
+      options: ["Credit", "Debit"],
+    },
+    {
+      name: "method",
+      label: "Payment Method",
+      type: "select",
+      required: true,
+      options: ["Cash", "Credit Card", "UPI", "Net Banking"],
+    },
+    {
+      name: "status",
+      label: "Status",
+      type: "select",
+      required: true,
+      options: ["Successful", "Pending", "Failed"],
+    },
+    {
+      name: "reference",
+      label: "UTR / Reference",
+      type: "text",
+      required: false,
+      placeholder: "Enter Reference (optional)",
+    },
+  ];
+
+  useEffect(() => {
+    setFormData(data);
+  }, [isModalOpen]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ["amount"].includes(name) ? parseInt(value, 10) || 0 : value,
+    }));
+  };
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    fetch(`http://localhost:8000/api/transactions/update`, {
+      method: "PUT",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert("Update Successful");
+        setIsModalOpen(false);
+        if (onTransactionUpdate) onTransactionUpdate(result.transactionId);
+      })
+      .catch((error) => {
+        alert("Error updating order");
+      });
+  };
+
+  const handleDelete = () => {
+    fetch(`http://localhost:8000/api/transactions/${data.transactionId}`, {
+      method: "DELETE",
+    }).then((res) => {
+      console.log(res.status);
+      if (res.status == 200) {
+        router.back();
+      }
+    });
   };
   return (
     <>
-      <div className="flex flex-row justify-start items-center gap-2 px-4">
+      <div className="w-full flex gap-4 mt-6">
         <button
-          aria-label="updateEntry"
-          type="button"
           onClick={() => {
             setIsModalOpen(true);
           }}
+          className="flex flex-1 items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all"
         >
-          <Pencil className="inline-block w-4 h-4 text-blue-500 cursor-pointer mr-2" />
+          <Pencil className="w-4 h-4" />
+          Update Details
         </button>
+
         <button
-          aria-label="deleteEntry"
-          type="button"
-          onClick={() => {
-            console.log(transactionId);
-          }}
+          onClick={handleDelete}
+          className="flex flex-1 items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all"
         >
-          <Trash className="inline-block w-4 h-4 text-red-500 cursor-pointer" />
+          <Trash className="w-4 h-4" />
+          Delete Details
         </button>
       </div>
       {isModalOpen && (
@@ -54,7 +157,7 @@ const TransactionActions = ({ transactionId, fields, data }) => {
               />
             </div>
 
-            <form className="mt-6 space-y-4">
+            <form className="mt-6 space-y-4" onSubmit={handleUpdate}>
               {fields.map((field, index) => (
                 <RenderFields
                   key={index}

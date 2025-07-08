@@ -1,7 +1,20 @@
+"use client";
 import TransactionHeader from "@/components/Transactions/TransactionHeader";
 import TransactionTable from "@/components/Transactions/TransactionTable";
-
+import { useState, useEffect } from "react";
 const TransactionsHistory = () => {
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    const res = await fetch(`http://localhost:8000/api/transactions`, {
+      cache: "no-store",
+    });
+    const result = await res.json();
+    console.log(result);
+    setData(result);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   const transactionsTable = {
     thead: [
       "Transaction ID",
@@ -13,52 +26,6 @@ const TransactionsHistory = () => {
       "Status",
       "Reference",
       "Actions",
-    ],
-    tbody: [
-      {
-        transactionId: "T001",
-        userName: "Alice Johnson",
-        transactionDateTime: "2025-06-10T14:45",
-        amount: 1500,
-        type: "Credit",
-        method: "Credit Card",
-        status: "Successful",
-        reference: "INV-101",
-        actions: <></>,
-      },
-      {
-        transactionId: "T002",
-        userName: "Bob Smith",
-        transactionDateTime: "2025-06-12T10:30",
-        amount: 2500,
-        type: "Debit",
-        method: "Cash",
-        status: "Pending",
-        reference: "ORD-102",
-        actions: <></>,
-      },
-      {
-        transactionId: "T003",
-        userName: "Charlie Lee",
-        transactionDateTime: "2025-06-15T17:00",
-        amount: 1800,
-        type: "Credit",
-        method: "UPI",
-        status: "Failed",
-        reference: "ORD-103",
-        actions: <></>,
-      },
-      {
-        transactionId: "T004",
-        userName: "Diana Prince",
-        transactionDateTime: "2025-06-18T12:15",
-        amount: 3200,
-        type: "Credit",
-        method: "Net Banking",
-        status: "Successful",
-        reference: "INV-104",
-        actions: <></>,
-      },
     ],
     fields: [
       {
@@ -118,10 +85,7 @@ const TransactionsHistory = () => {
   return (
     <>
       <TransactionHeader fields={transactionsTable.fields} />
-      <TransactionTable
-        transactionTable={transactionsTable}
-        showActions={true}
-      />
+      <TransactionTable data={data} />
     </>
   );
 };

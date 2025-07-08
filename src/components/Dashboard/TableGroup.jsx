@@ -3,13 +3,11 @@ import Link from "next/link";
 import OrderTable from "@/components/Orders/OrderTable";
 import TransactionTable from "@/components/Transactions/TransactionTable";
 import { useEffect, useState } from "react";
-const TableGroup = ({ tablesData }) => {
+const TableGroup = () => {
   const [orderData, setOrderData] = useState([]);
+  const [transactionData, setTransactionData] = useState([]);
   useEffect(() => {
     fetch("http://localhost:8000/api/orders", {
-      headers: {
-        "Content-Type": "application/json",
-      },
       cache: "no-store",
     })
       .then((res) => res.json()) // Parse JSON from response
@@ -17,11 +15,20 @@ const TableGroup = ({ tablesData }) => {
         setOrderData(data); // This will log the actual order data array
       });
   }, []);
+  useEffect(() => {
+    fetch("http://localhost:8000/api/transactions", {
+      cache: "no-store",
+    })
+      .then((res) => res.json()) // Parse JSON from response
+      .then((data) => {
+        setTransactionData(data); // This will log the actual order data array
+      });
+  }, []);
 
   return (
     <>
       <div>
-        <div className="grid grid-cols-1  gap-2 px-5 my-8">
+        <div className="grid grid-cols-1  gap-2 px-5 my-8 max-w-fit">
           <div className="w-full flex items-center justify-between ">
             <h1 className="text-lg font-semibold ">Recent Orders</h1>
             <Link
@@ -31,12 +38,9 @@ const TableGroup = ({ tablesData }) => {
               View All
             </Link>
           </div>
-          <OrderTable
-            ordersTable={tablesData.recentOrdersData}
-            data={orderData}
-          />
+          <OrderTable data={orderData} />
         </div>
-        <div className="grid grid-cols-1  gap-2 px-5 my-8">
+        <div className="grid grid-cols-1 gap-2 px-5 my-8  max-w-fit">
           <div className="w-full flex items-center justify-between ">
             <h1 className="text-lg font-semibold ">Recent Transactions</h1>
             <Link
@@ -46,9 +50,7 @@ const TableGroup = ({ tablesData }) => {
               View All
             </Link>
           </div>
-          <TransactionTable
-            transactionTable={tablesData.recentTransactionsData}
-          />
+          <TransactionTable data={transactionData} />
         </div>
       </div>
     </>

@@ -14,7 +14,12 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ["amount", "quantity"].includes(name)
+        ? parseInt(value, 10) || 0
+        : value,
+    }));
   };
 
   const fields = [

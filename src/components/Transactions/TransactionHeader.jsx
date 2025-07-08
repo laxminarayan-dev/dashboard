@@ -4,8 +4,6 @@ import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
 
 const TransactionHeader = ({ fields }) => {
-  console.log(fields);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({});
   const handleInputChange = (e) => {
@@ -27,7 +25,7 @@ const TransactionHeader = ({ fields }) => {
           Manage your Transactions history here.
         </p>
       </div>
-      <div className="flex items-center justify-between mb-4">
+      <div className="max-w-[42rem] flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Transactions</h1>
         <button
           onClick={() => {

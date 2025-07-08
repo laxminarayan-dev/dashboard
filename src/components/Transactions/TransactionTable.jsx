@@ -1,51 +1,61 @@
-import TransactionActions from "./TransactionActions";
-const TransactionTable = ({ transactionTable, showActions = false }) => {
+"use client";
+import { useRouter } from "next/navigation";
+const TransactionTable = ({ data }) => {
+  const router = useRouter();
   return (
     <div className="overflow-auto">
-      <table className="min-w-full w-[35rem] bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden">
+      <table className="min-w-[fit-content] bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden">
         <thead className="bg-gray-100 whitespace-nowrap">
           <tr>
-            {transactionTable.thead.map((th, index) => {
-              if (th == "Actions" && showActions == false) {
-                return;
-              } else {
-                return (
-                  <th
-                    key={th + index}
-                    className="p-4 text-left text-[13px] font-semibold text-slate-900"
-                  >
-                    {th}
-                  </th>
-                );
-              }
-            })}
+            <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
+              Transaction Id
+            </th>
+            <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
+              User
+            </th>
+            <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
+              Amount
+            </th>
+            <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
+              Method
+            </th>
+            <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
+              Status
+            </th>
+            <th className="p-4 text-left text-[13px] font-semibold text-slate-900">
+              More Details
+            </th>
           </tr>
         </thead>
         <tbody className="whitespace-nowrap">
-          {transactionTable.tbody.map((tr, index) => (
+          {data.map((tr, index) => (
             <tr key={index + tr.transactionId} className="hover:bg-gray-50">
-              {Object.entries(tr).map(([key, value]) => {
-                if (key != "actions") {
-                  return (
-                    <td
-                      className="p-4 text-[15px] text-slate-600 font-medium"
-                      key={key}
-                    >
-                      {value}
-                    </td>
-                  );
-                } else if (key == "actions" && showActions) {
-                  return (
-                    <td key={key}>
-                      <TransactionActions
-                        transactionId={tr.transactionId}
-                        fields={transactionTable.fields}
-                        data={tr}
-                      />
-                    </td>
-                  );
-                }
-              })}
+              <td className="p-4 text-[15px] text-slate-600 font-medium">
+                {tr.transactionId}
+              </td>
+              <td className="p-4 text-[15px] text-slate-600 font-medium">
+                {tr.userName}
+              </td>
+              <td className="p-4 text-[15px] text-slate-600 font-medium">
+                {tr.amount}
+              </td>
+              <td className="p-4 text-[15px] text-slate-600 font-medium">
+                {tr.method}
+              </td>
+              <td className="p-4 text-[15px] text-slate-600 font-medium">
+                {tr.status}
+              </td>
+              <td className="p-4 text-[15px] text-blue-600  font-medium">
+                <button
+                  type="button"
+                  className="underline cursor-pointer"
+                  onClick={() => {
+                    router.push(`/transactions/${tr.transactionId}`);
+                  }}
+                >
+                  Other Details
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
