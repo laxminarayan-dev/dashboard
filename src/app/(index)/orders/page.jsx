@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 const OrdersHistory = () => {
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    const res = await fetch(`http://localhost:8000/api/orders-all`, {
-      method: "POST",
+    const res = await fetch(`http://localhost:8000/api/orders`, {
       cache: "no-store",
     });
     setData(await res.json());

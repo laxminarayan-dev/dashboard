@@ -42,7 +42,7 @@ const OrderHeader = ({ fields, onAddData }) => {
     e.preventDefault();
     const orderId = generateOrderId();
     const objBody = { ...formData, orderId };
-    fetch("http://localhost:8000/api/addOrder", {
+    fetch("http://localhost:8000/api/orders/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,6 +52,7 @@ const OrderHeader = ({ fields, onAddData }) => {
       if (res.status == 200) {
         alert("Order Entry Added Successfully");
         setIsModalOpen(false);
+        setFormData(initialData);
         onAddData();
       } else {
         alert("Order Entry Added Failed");

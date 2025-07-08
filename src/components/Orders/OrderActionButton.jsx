@@ -81,8 +81,8 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8000/api/updateOrder/${data.orderId}`, {
-      method: "POST",
+    fetch(`http://localhost:8000/api/orders/update`, {
+      method: "PUT",
       body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
@@ -100,8 +100,8 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
   };
 
   const handleDelete = () => {
-    fetch(`http://localhost:8000/api/orderDelete/${data.orderId}`, {
-      method: "POST",
+    fetch(`http://localhost:8000/api/orders/${data.orderId}`, {
+      method: "DELETE",
     }).then((res) => {
       console.log(res.status);
       if (res.status == 200) {

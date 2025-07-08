@@ -19,11 +19,12 @@ const Order = () => {
   const [data, setData] = useState(initialData);
   const params = useParams();
   const fetchOrderDetail = async (orderID) => {
-    const res = await fetch(`http://localhost:8000/api/order/${orderID}`, {
-      method: "POST",
+    const res = await fetch(`http://localhost:8000/api/orders/${orderID}`, {
       cache: "no-store",
     });
-    setData(await res.json());
+    const result = await res.json();
+    console.log(result);
+    setData(result);
   };
   useEffect(() => {
     const orderID = params.id;
@@ -39,7 +40,7 @@ const Order = () => {
       <div className="space-y-4 text-gray-700">
         <div>
           <p className="text-sm text-gray-500">Order ID</p>
-          <p className="font-semibold text-lg">{data.id}</p>
+          <p className="font-semibold text-lg">{data.orderId}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">

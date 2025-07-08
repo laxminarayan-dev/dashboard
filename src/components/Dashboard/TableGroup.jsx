@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 const TableGroup = ({ tablesData }) => {
   const [orderData, setOrderData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/api/orders-all", {
-      method: "POST",
+    fetch("http://localhost:8000/api/orders", {
       headers: {
         "Content-Type": "application/json",
       },
