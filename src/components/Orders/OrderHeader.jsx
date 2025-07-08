@@ -3,19 +3,60 @@ import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
 
-const OrderHeader = ({ fields }) => {
-  console.log(fields);
-
+const OrderHeader = ({ fields, onAddData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({});
+  const initialData = {
+    amount: 0,
+    customerName: "",
+    deliveredDateTime: "",
+    orderDateTime: "",
+    orderId: "",
+    orderItem: "",
+    paymentMethod: "Cash On Delivery",
+    quantity: 0,
+    status: "Pending",
+  };
+  const generateOrderId = (prefix = "ORD") => {
+    const timestamp = Date.now().toString(36).toUpperCase(); // e.g. "LTS3D0"
+    const random = Math.floor(Math.random() * 36 ** 2)
+      .toString(36)
+      .toUpperCase(); // e.g. "A9"
+
+    // Take last 3 from timestamp and 2 from random (or adjust as needed)
+    const id = (timestamp.slice(-3) + random).slice(0, 5).padStart(5, "0");
+    return prefix + id;
+  };
+
+  const [formData, setFormData] = useState(initialData);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ["amount", "quantity"].includes(name)
+        ? parseInt(value, 10) || 0
+        : value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsModalOpen(false);
+    const orderId = generateOrderId();
+    const objBody = { ...formData, orderId };
+    fetch("http://localhost:8000/api/addOrder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(objBody),
+    }).then((res) => {
+      if (res.status == 200) {
+        alert("Order Entry Added Successfully");
+        setIsModalOpen(false);
+        onAddData();
+      } else {
+        alert("Order Entry Added Failed");
+      }
+    });
   };
   return (
     <>

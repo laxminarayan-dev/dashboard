@@ -56,9 +56,9 @@ const renderFields = ({ field, handleInputChange, formData }) => {
               name={field.name}
               value={formData[field.name]}
               onChange={handleInputChange}
+              onWheel={(e) => e.target.blur()}
               required={field.required}
               placeholder={field.placeholder}
-              step={field.step}
               min={field.min}
               className={`${commonInputClass} ${field.prefix ? "pl-7" : ""}`}
             />

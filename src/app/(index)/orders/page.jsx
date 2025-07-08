@@ -1,13 +1,20 @@
+"use client";
 import OrderHeader from "@/components/Orders/OrderHeader";
 import OrderTable from "@/components/Orders/OrderTable";
+import { useEffect, useState } from "react";
 
-const OrdersHistory = async () => {
-  "use server";
-  const res = await fetch(`http://localhost:8000/api/orders-all`, {
-    method: "POST",
-    cache: "no-store",
-  });
-  const result = await res.json();
+const OrdersHistory = () => {
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    const res = await fetch(`http://localhost:8000/api/orders-all`, {
+      method: "POST",
+      cache: "no-store",
+    });
+    setData(await res.json());
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   const ordersTable = {
     thead: [
       "Order ID",
@@ -43,7 +50,6 @@ const OrdersHistory = async () => {
         type: "number",
         required: true,
         min: "1",
-        step: "1",
         placeholder: "Enter Quantity",
       },
       {
@@ -87,8 +93,8 @@ const OrdersHistory = async () => {
 
   return (
     <>
-      <OrderHeader fields={ordersTable.fields} />
-      <OrderTable ordersTable={ordersTable} data={result} showActions={true} />
+      <OrderHeader fields={ordersTable.fields} onAddData={fetchData} />
+      <OrderTable ordersTable={ordersTable} data={data} showActions={true} />
     </>
   );
 };
