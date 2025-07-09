@@ -82,6 +82,12 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
       type: "datetime-local",
       required: false,
     },
+    {
+      name: "deliveredAddress",
+      label: "Delivered Address",
+      type: "textarea",
+      required: true,
+    },
   ];
 
   const handleUpdate = (e) => {

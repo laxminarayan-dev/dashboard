@@ -14,6 +14,7 @@ const OrderHeader = ({ fields, onAddData }) => {
     paymentMethod: "Cash On Delivery",
     quantity: 0,
     status: "Pending",
+    deliveredAddress: "",
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(initialData);

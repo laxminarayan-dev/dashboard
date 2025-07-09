@@ -87,6 +87,12 @@ const OrdersHistory = () => {
         type: "datetime-local",
         required: false,
       },
+      {
+        name: "deliveredAddress",
+        label: "Delivered Address",
+        type: "textarea",
+        required: true,
+      },
     ],
   };
 

@@ -28,7 +28,7 @@ const Order = () => {
     paymentMethod: "",
     quantity: 0,
     status: "",
-    location: "",
+    deliveredAddress: "",
   };
 
   const [data, setData] = useState(initialData);
@@ -112,12 +112,15 @@ const Order = () => {
             <strong className="text-gray-800">{data.paymentMethod}</strong>
           </div>
 
-          {data.location && (
+          {data.deliveredAddress && (
             <div className="flex items-start gap-2">
               <MapPinned className="w-4 h-4 text-rose-500 mt-0.5" />
               <div>
-                Location:
-                <p className="text-gray-500 text-sm">{data.location}</p>
+                Delivery Address:
+                <br />
+                <strong className="text-gray-800 text-sm">
+                  {data.deliveredAddress}
+                </strong>
               </div>
             </div>
           )}
