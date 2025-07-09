@@ -4,15 +4,22 @@ import TableGroup from "@/components/Dashboard/TableGroup";
 
 const Home = async () => {
   "use server";
-  const res = await fetch("http://localhost:8000/api/dashboard-data", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
+  let data;
+  try {
+    const res = await fetch("http://localhost:8000/api/dashboard-data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
 
-  const data = await res.json();
+    data = await res.json();
+  } catch (error) {
+    console.log(error);
+
+    data = { kpiData: [], chartData: [], tablesData: [] };
+  }
   return (
     <>
       <div className=" w-full flex-col scroll-smooth justify-center items-center flex-1 bg-transparent">

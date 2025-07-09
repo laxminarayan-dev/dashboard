@@ -13,6 +13,10 @@ const TableGroup = () => {
       .then((res) => res.json()) // Parse JSON from response
       .then((data) => {
         setOrderData(data); // This will log the actual order data array
+      })
+      .catch((err) => {
+        setOrderData([]); // This will log the actual order data array
+        console.log("failed to fetch orders data");
       });
   }, []);
   useEffect(() => {
@@ -22,13 +26,17 @@ const TableGroup = () => {
       .then((res) => res.json()) // Parse JSON from response
       .then((data) => {
         setTransactionData(data); // This will log the actual order data array
+      })
+      .catch(() => {
+        setTransactionData([]);
+        console.log("failed to fetch transactions data data");
       });
   }, []);
 
   return (
     <>
-      <div>
-        <div className="grid grid-cols-1  gap-2 px-5 my-8 max-w-fit">
+      <div className="flex flex-col lg:flex-row">
+        <div className="grid grid-cols-1  gap-2 px-5 my-8 flex-1/2">
           <div className="w-full flex items-center justify-between ">
             <h1 className="text-lg font-semibold ">Recent Orders</h1>
             <Link
@@ -38,9 +46,15 @@ const TableGroup = () => {
               View All
             </Link>
           </div>
-          <OrderTable data={orderData} />
+          {orderData.length <= 0 ? (
+            <div className="w-full bg-white shadow h-80 flex justify-center items-center rounded-md">
+              <h1>No data to show</h1>
+            </div>
+          ) : (
+            <OrderTable data={orderData} />
+          )}
         </div>
-        <div className="grid grid-cols-1 gap-2 px-5 my-8  max-w-fit">
+        <div className="grid grid-cols-1 gap-2 px-5 my-8 flex-1/2">
           <div className="w-full flex items-center justify-between ">
             <h1 className="text-lg font-semibold ">Recent Transactions</h1>
             <Link
@@ -50,7 +64,13 @@ const TableGroup = () => {
               View All
             </Link>
           </div>
-          <TransactionTable data={transactionData} />
+          {transactionData.length <= 0 ? (
+            <div className="w-full bg-white shadow h-80 flex justify-center items-center rounded-md">
+              <h1>No data to show</h1>
+            </div>
+          ) : (
+            <TransactionTable data={transactionData} />
+          )}
         </div>
       </div>
     </>
