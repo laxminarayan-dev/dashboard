@@ -145,51 +145,60 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
 
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-[1000] overflow-auto bg-black bg-opacity-50 p-4"
+          className="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-sm flex items-center justify-center px-4"
           onClick={() => setIsModalOpen(false)}
         >
           <div
-            className="relative mx-auto mt-10 bg-white shadow-lg rounded-lg p-6 w-full max-w-lg"
+            className="relative w-full max-w-2xl h-[90vh] bg-white rounded-xl shadow-xl flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-3 border-b border-gray-200">
+            {/* Header */}
+            <div className="flex items-start justify-between px-6 pt-6 pb-4 border-b border-gray-200 sticky top-0 bg-white z-20">
               <div>
-                <h3 className="text-slate-900 text-xl font-semibold">
-                  Update Order's Detail
-                </h3>
-                <p className="text-slate-600 text-xs mt-1">Edit details</p>
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  📝 Update Order
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  Edit the fields below
+                </p>
               </div>
               <X
                 onClick={() => setIsModalOpen(false)}
-                className="w-5 h-5 cursor-pointer text-gray-400 hover:text-red-500"
+                className="w-6 h-6 text-gray-400 hover:text-red-500 cursor-pointer"
               />
             </div>
 
-            <form className="mt-6 space-y-4" onSubmit={handleUpdate}>
-              {fields.map((field, index) => (
-                <RenderFields
-                  key={index}
-                  field={field}
-                  handleInputChange={handleInputChange}
-                  formData={formData}
-                />
-              ))}
-              <div className="border-t border-gray-200 pt-6 flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="w-full px-4 py-2 rounded-lg text-slate-900 text-sm font-medium bg-gray-200 hover:bg-gray-300"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="w-full px-4 py-2 rounded-lg text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
-                >
-                  Update
-                </button>
-              </div>
-            </form>
+            {/* Form Body (scrollable) */}
+            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-5">
+              <form onSubmit={handleUpdate} className="space-y-4">
+                {fields.map((field, index) => (
+                  <RenderFields
+                    key={index}
+                    field={field}
+                    handleInputChange={handleInputChange}
+                    formData={formData}
+                  />
+                ))}
+              </form>
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 border-t border-gray-200 flex justify-end gap-3 bg-white sticky bottom-0 z-20">
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-2 rounded-md bg-gray-100 text-gray-700 text-sm hover:bg-gray-200"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                form="form-id"
+                className="px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700"
+              >
+                Update
+              </button>
+            </div>
           </div>
         </div>
       )}
