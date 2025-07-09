@@ -48,7 +48,7 @@ const TableGroup = () => {
           </div>
           {orderData.length <= 0 ? (
             <div className="w-full bg-white shadow h-80 flex justify-center items-center rounded-md">
-              <h1>No data to show</h1>
+              <h1 className="text-lg text-gray-700">No data to display.</h1>
             </div>
           ) : (
             <OrderTable data={orderData} />
@@ -66,7 +66,7 @@ const TableGroup = () => {
           </div>
           {transactionData.length <= 0 ? (
             <div className="w-full bg-white shadow h-80 flex justify-center items-center rounded-md">
-              <h1>No data to show</h1>
+              <h1 className="text-lg text-gray-700">No data to display.</h1>
             </div>
           ) : (
             <TransactionTable data={transactionData} />
