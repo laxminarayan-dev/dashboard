@@ -1,7 +1,5 @@
 "use client";
-
 import {
-  FileText,
   UserRound,
   Utensils,
   Hash,
@@ -16,35 +14,18 @@ import {
 import OrderActionButton from "@/components/Orders/OrderActionButton";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-
+import { fetchOneOrder } from "@/store/orderAPI";
+import { ordersInitialData as initialData } from "@/lib/initialData";
 const Order = () => {
-  const initialData = {
-    amount: 0,
-    customerName: "",
-    deliveredDateTime: "",
-    orderDateTime: "",
-    orderId: "",
-    orderItem: "",
-    paymentMethod: "",
-    quantity: 0,
-    status: "",
-    deliveredAddress: "",
-  };
-
   const [data, setData] = useState(initialData);
   const params = useParams();
-
-  const fetchOrderDetail = async (orderID) => {
-    const res = await fetch(`http://localhost:8000/api/orders/${orderID}`, {
-      cache: "no-store",
-    });
-    const result = await res.json();
-    setData(result);
+  const loadData = async (orderId) => {
+    const order = await fetchOneOrder(orderId);
+    setData(order);
   };
-
   useEffect(() => {
     const orderID = params.id;
-    fetchOrderDetail(orderID);
+    loadData(orderID);
   }, []);
 
   return (
@@ -128,7 +109,7 @@ const Order = () => {
 
         {/* Action Button */}
         <div className="pt-4">
-          <OrderActionButton data={data} onOrderUpdate={fetchOrderDetail} />
+          <OrderActionButton data={data} onOrderUpdate={loadData} />
         </div>
       </div>
     </div>

@@ -9,35 +9,19 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import TransactionActions from "@/components/Transactions/TransactionActions";
+import { fetchOneTransaction } from "@/store/transactionAPI";
+import { transactionsInitialData as initialData } from "@/lib/initialData";
 
 const TransactionDetail = () => {
-  const initialData = {
-    amount: 0,
-    transactionId: "",
-    status: "",
-    transactionDateTime: "",
-    method: "",
-    reference: "",
-    type: "",
-    userName: "",
-  };
   const [data, setData] = useState(initialData);
   const params = useParams();
-
-  const fetchTransactionDetail = async (transactionId) => {
-    const res = await fetch(
-      `http://localhost:8000/api/transactions/${transactionId}`,
-      {
-        cache: "no-store",
-      }
-    );
-    const result = await res.json();
-    setData(result);
+  const loadData = async (transactionId) => {
+    const transaction = await fetchOneTransaction(transactionId);
+    setData(transaction);
   };
-
   useEffect(() => {
     const transactionId = params.id;
-    fetchTransactionDetail(transactionId);
+    loadData(transactionId);
   }, []);
 
   return (
@@ -108,10 +92,7 @@ const TransactionDetail = () => {
 
         {/* Action Button */}
         <div className="pt-4">
-          <TransactionActions
-            data={data}
-            onTransactionUpdate={fetchTransactionDetail}
-          />
+          <TransactionActions data={data} onTransactionUpdate={loadData} />
         </div>
       </div>
     </div>
