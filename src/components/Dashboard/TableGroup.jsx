@@ -13,7 +13,6 @@ const TableGroup = () => {
       .then((res) => res.json()) // Parse JSON from response
       .then((data) => {
         setOrderData(data); // This will log the actual order data array
-        console.log("");
       })
       .catch((err) => {
         setOrderData([]); // This will log the actual order data array

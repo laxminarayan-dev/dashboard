@@ -16,7 +16,6 @@ const Home = async () => {
 
     data = await res.json();
   } catch (error) {
-    console.log("");
     console.log(error);
 
     data = { kpiData: [], chartData: [], tablesData: [] };
