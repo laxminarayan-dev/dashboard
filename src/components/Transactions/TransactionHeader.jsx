@@ -2,18 +2,10 @@
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
+import { transactionFields as fields } from "@/lib/fields";
+import { transactionsInitialData as initialData } from "@/lib/initialData";
 
-const TransactionHeader = ({ fields, onAddData }) => {
-  const initialData = {
-    amount: 0,
-    transactionId: "",
-    status: "Successful",
-    transactionDateTime: "",
-    method: "Cash",
-    reference: "",
-    type: "Credit",
-    userName: "",
-  };
+const TransactionHeader = ({ onAddData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(initialData);
 
