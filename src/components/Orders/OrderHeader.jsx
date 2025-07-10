@@ -2,20 +2,9 @@
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
-
-const OrderHeader = ({ fields, onAddData }) => {
-  const initialData = {
-    amount: 0,
-    customerName: "",
-    deliveredDateTime: "",
-    orderDateTime: "",
-    orderId: "",
-    orderItem: "",
-    paymentMethod: "Cash On Delivery",
-    quantity: 0,
-    status: "Pending",
-    deliveredAddress: "",
-  };
+import { orderFields as fields } from "@/lib/fields";
+import { ordersInitialData as initialData } from "@/lib/initialData";
+const OrderHeader = ({ onAddData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(initialData);
 
