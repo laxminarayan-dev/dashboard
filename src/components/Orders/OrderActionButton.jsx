@@ -3,11 +3,13 @@ import { Pencil, Trash, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import RenderFields from "../Shared/RenderFields";
+import { orderFields as fields } from "@/lib/fields";
+import { ordersInitialData as initialData } from "@/lib/initialData";
 
 const OrderActionButton = ({ data, onOrderUpdate }) => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState(data);
+  const [formData, setFormData] = useState(initialData);
   useEffect(() => {
     setFormData(data);
   }, [isModalOpen]);
@@ -21,75 +23,6 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
         : value,
     }));
   };
-
-  const fields = [
-    {
-      name: "customerName",
-      label: "Customer Name",
-      type: "text",
-      required: true,
-      placeholder: "Enter Customer Name",
-    },
-    {
-      name: "orderItem",
-      label: "Order Item",
-      type: "text",
-      required: true,
-      placeholder: "Enter Item Name",
-    },
-    {
-      name: "quantity",
-      label: "Quantity",
-      type: "number",
-      required: true,
-      min: "1",
-      step: "1",
-      placeholder: "Enter Quantity",
-    },
-    {
-      name: "orderDateTime",
-      label: "Order Date & Time",
-      type: "datetime-local",
-      required: true,
-    },
-    {
-      name: "amount",
-      label: "Amount",
-      type: "number",
-      required: true,
-      placeholder: "0.00",
-      step: "1",
-      min: "0",
-      prefix: "₹",
-    },
-    {
-      name: "status",
-      label: "Status",
-      type: "select",
-      required: true,
-      options: ["Pending", "Shipped", "Delivered", "Cancelled"],
-    },
-    {
-      name: "paymentMethod",
-      label: "Payment Method",
-      type: "select",
-      required: true,
-      options: ["Cash on Delivery", "Credit Card", "UPI", "Net Banking"],
-    },
-    {
-      name: "deliveredDateTime",
-      label: "Delivered Date & Time",
-      type: "datetime-local",
-      required: false,
-    },
-    {
-      name: "deliveredAddress",
-      label: "Delivered Address",
-      type: "textarea",
-      required: true,
-    },
-  ];
-
   const handleUpdate = (e) => {
     e.preventDefault();
     fetch(`http://localhost:8000/api/orders/update`, {
