@@ -100,7 +100,7 @@ const OrderHeader = ({ onAddData }) => {
 
             {/* Form Body (scrollable) */}
             <div className="flex-1 overflow-y-auto px-6 py-4 space-y-5">
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form className="space-y-4">
                 {fields.map((field, index) => (
                   <RenderFields
                     key={index}
@@ -122,7 +122,7 @@ const OrderHeader = ({ onAddData }) => {
                 Cancel
               </button>
               <button
-                type="submit"
+                onClick={handleSubmit}
                 form="form-id"
                 className="px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700"
               >

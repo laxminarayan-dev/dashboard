@@ -5,19 +5,19 @@ export const ordersInitialData = {
     orderDateTime: "",
     orderId: "",
     orderItem: "",
-    paymentMethod: "",
+    paymentMethod: "Cash On Delivery",
     quantity: 0,
-    status: "",
+    status: "Pending",
     deliveredAddress: "",
 };
 
 export const transactionsInitialData = {
     amount: 0,
     transactionId: "",
-    status: "",
+    status: "Successful",
     transactionDateTime: "",
-    method: "",
+    method: "Cash",
     reference: "",
-    type: "",
+    type: "Credit",
     userName: "",
 };
