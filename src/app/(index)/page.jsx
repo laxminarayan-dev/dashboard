@@ -1,28 +1,21 @@
+"use client";
 import KPIBoxGroup from "@/components/Dashboard/KpiBox";
 import ChartGroup from "@/components/Charts/ChartGroup";
 import TableGroup from "@/components/Dashboard/TableGroup";
-import BACKEND_URL from "@/lib/env";
+import fetchDashboardData, { initialData } from "@/store/dashboardAPI";
+import { useEffect, useState } from "react";
 
-const Home = async () => {
-  "use server";
-  let data;
-  try {
-    const res = await fetch(
-      `https://mrhalwaibackend.onrender.com/api/dashboard-data`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-      }
-    );
+const Home = () => {
+  const [data, setData] = useState(initialData);
 
-    data = await res.json();
-  } catch (error) {
-    console.log(error);
-    data = { kpiData: [], chartData: [], tablesData: [] };
-  }
+  const loadData = async () => {
+    const dashboardData = await fetchDashboardData();
+    setData(dashboardData);
+  };
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <>
       <div className=" w-full flex-col scroll-smooth justify-center items-center flex-1 bg-transparent">

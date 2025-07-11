@@ -1,6 +1,6 @@
 import ChartCard from "./ChartCard";
 
-const ChartGroup = async ({ chartData }) => {
+const ChartGroup = ({ chartData }) => {
   return (
     <div className="grid grid-cols-12 w-full h-fit place-items-center px-5 gap-4">
       <ChartCard

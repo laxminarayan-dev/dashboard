@@ -1,5 +1,5 @@
 import { IndianRupee, ShoppingCart, Users } from "lucide-react";
-const KPIBoxGroup = async ({ kpiData }) => {
+const KPIBoxGroup = ({ kpiData }) => {
   return (
     <div className="mb-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-5">

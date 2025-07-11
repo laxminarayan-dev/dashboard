@@ -1,5 +1,5 @@
 import { ordersInitialData } from "@/lib/initialData";
-import BACKEND_URL from "@/lib/env";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export const fetchAllOrder = async () => {
     try {
