@@ -25,7 +25,7 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
   };
   const handleUpdate = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8000/api/orders/update`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/update`, {
       method: "PUT",
       body: JSON.stringify(formData),
       headers: {
@@ -44,7 +44,7 @@ const OrderActionButton = ({ data, onOrderUpdate }) => {
   };
 
   const handleDelete = () => {
-    fetch(`http://localhost:8000/api/orders/${data.orderId}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/${data.orderId}`, {
       method: "DELETE",
     }).then((res) => {
       console.log(res.status);
