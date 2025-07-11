@@ -6,7 +6,7 @@ const Home = async () => {
   "use server";
   let data;
   try {
-    const res = await fetch("http://localhost:8000/api/dashboard-data", {
+    const res = await fetch(`${process.env.BACKEND_URL}/api/dashboard-data`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,6 +15,7 @@ const Home = async () => {
     });
 
     data = await res.json();
+    console.log(data);
   } catch (error) {
     console.log(error);
 

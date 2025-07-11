@@ -1,37 +1,9 @@
-"use client";
 import Link from "next/link";
 import OrderTable from "@/components/Orders/OrderTable";
 import TransactionTable from "@/components/Transactions/TransactionTable";
-import { useEffect, useState } from "react";
-const TableGroup = () => {
-  const [orderData, setOrderData] = useState([]);
-  const [transactionData, setTransactionData] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:8000/api/orders", {
-      cache: "no-store",
-    })
-      .then((res) => res.json()) // Parse JSON from response
-      .then((data) => {
-        setOrderData(data); // This will log the actual order data array
-      })
-      .catch((err) => {
-        setOrderData([]); // This will log the actual order data array
-        console.log("failed to fetch orders data");
-      });
-  }, []);
-  useEffect(() => {
-    fetch("http://localhost:8000/api/transactions", {
-      cache: "no-store",
-    })
-      .then((res) => res.json()) // Parse JSON from response
-      .then((data) => {
-        setTransactionData(data); // This will log the actual order data array
-      })
-      .catch(() => {
-        setTransactionData([]);
-        console.log("failed to fetch transactions data data");
-      });
-  }, []);
+const TableGroup = ({ tablesData }) => {
+  const orderData = tablesData.recentOrdersData;
+  const transactionData = tablesData.recentTransactionsData;
 
   return (
     <>

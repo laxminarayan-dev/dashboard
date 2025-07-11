@@ -95,7 +95,7 @@ const TransactionHeader = ({ onAddData }) => {
               />
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <form className="mt-6 space-y-4">
               {fields.map((field, index) => (
                 <RenderFields
                   key={index}
@@ -114,7 +114,7 @@ const TransactionHeader = ({ onAddData }) => {
                   Cancel
                 </button>
                 <button
-                  type="submit"
+                  onClick={handleSubmit}
                   className="w-full px-4 py-2 rounded-lg text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
                 >
                   Add Entry
