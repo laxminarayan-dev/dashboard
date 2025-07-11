@@ -1,9 +1,11 @@
 import KPIBoxGroup from "@/components/Dashboard/KpiBox";
 import ChartGroup from "@/components/Charts/ChartGroup";
 import TableGroup from "@/components/Dashboard/TableGroup";
+import { unstable_noStore as noStore } from "next/cache";
 
 const Home = async () => {
   "use server";
+  noStore();
   let data;
   try {
     const res = await fetch(
