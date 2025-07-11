@@ -7,7 +7,7 @@ const Home = async () => {
   let data;
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dashboard-data`,
+      `${process.env.BACKEND_URL_FOR_SERVER_COMP}/api/dashboard-data`,
       {
         method: "POST",
         headers: {
