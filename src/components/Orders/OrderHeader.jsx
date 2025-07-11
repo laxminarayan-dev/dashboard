@@ -4,6 +4,7 @@ import { Plus, X } from "lucide-react";
 import RenderFields from "../Shared/RenderFields";
 import { orderFields as fields } from "@/lib/fields";
 import { ordersInitialData as initialData } from "@/lib/initialData";
+import BACKEND_URL from "@/lib/env";
 const OrderHeader = ({ onAddData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(initialData);
@@ -36,7 +37,7 @@ const OrderHeader = ({ onAddData }) => {
     e.preventDefault();
     const orderId = generateOrderId();
     const objBody = { ...formData, orderId };
-    fetch("http://localhost:8000/api/orders/add", {
+    fetch(`${BACKEND_URL}/api/orders/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

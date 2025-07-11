@@ -1,29 +1,23 @@
 import KPIBoxGroup from "@/components/Dashboard/KpiBox";
 import ChartGroup from "@/components/Charts/ChartGroup";
 import TableGroup from "@/components/Dashboard/TableGroup";
-import { unstable_noStore as noStore } from "next/cache";
+import BACKEND_URL from "@/lib/env";
 
 const Home = async () => {
   "use server";
-  noStore();
   let data;
   try {
-    const res = await fetch(
-      `${process.env.BACKEND_URL_FOR_SERVER_COMP}/api/dashboard-data`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`${BACKEND_URL}/api/dashboard-data`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
 
     data = await res.json();
-    console.log(data);
   } catch (error) {
     console.log(error);
-
     data = { kpiData: [], chartData: [], tablesData: [] };
   }
   return (
