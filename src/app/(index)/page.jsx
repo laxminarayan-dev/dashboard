@@ -7,13 +7,16 @@ const Home = async () => {
   "use server";
   let data;
   try {
-    const res = await fetch(`${BACKEND_URL}/api/dashboard-data`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `https://mrhalwaibackend.onrender.com/api/dashboard-data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      }
+    );
 
     data = await res.json();
   } catch (error) {
