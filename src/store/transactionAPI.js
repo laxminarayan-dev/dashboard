@@ -1,8 +1,9 @@
 import { transactionsInitialData } from "@/lib/initialData";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export const fetchAllTransaction = async () => {
   try {
-    const res = await fetch(`http://localhost:8000/api/transactions`, {
+    const res = await fetch(`${BACKEND_URL}/api/transactions`, {
       cache: "no-store",
     });
     return await res.json();
@@ -13,7 +14,7 @@ export const fetchAllTransaction = async () => {
 export const fetchOneTransaction = async (transactionId) => {
   try {
     const res = await fetch(
-      `http://localhost:8000/api/transactions/${transactionId}`,
+      `${BACKEND_URL}/api/transactions/${transactionId}`,
       {
         cache: "no-store",
       }

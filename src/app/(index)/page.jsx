@@ -6,13 +6,16 @@ const Home = async () => {
   "use server";
   let data;
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/api/dashboard-data`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dashboard-data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      }
+    );
 
     data = await res.json();
     console.log(data);

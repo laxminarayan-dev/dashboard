@@ -1,8 +1,9 @@
 import { ordersInitialData } from "@/lib/initialData";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export const fetchAllOrder = async () => {
     try {
-        const res = await fetch(`http://localhost:8000/api/orders`, {
+        const res = await fetch(`${BACKEND_URL}/api/orders`, {
             cache: "no-store",
         });
         return await res.json();
@@ -14,7 +15,7 @@ export const fetchAllOrder = async () => {
 
 export const fetchOneOrder = async (orderID) => {
     try {
-        const res = await fetch(`http://localhost:8000/api/orders/${orderID}`, {
+        const res = await fetch(`${BACKEND_URL}/api/orders/${orderID}`, {
             cache: "no-store",
         });
         return await res.json();
