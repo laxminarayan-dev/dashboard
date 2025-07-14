@@ -10,25 +10,25 @@ export const initialData = {
         recentTransactionsData: []
     }
 }
-
-const fetchDashboardData = async () => {
+const fetchDashboardData = async (setLoadingFun) => {
     try {
-        const res = await fetch(
-            `${BACKEND_URL}/api/dashboard-data`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                cache: "no-store",
-            }
-        );
+        setLoadingFun(true);
+        const res = await fetch(`${BACKEND_URL}/api/dashboard-data`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            cache: "no-store",
+        });
 
-        return await res.json();
+        const data = await res.json();
+        setLoadingFun(false);
+        return data;
     } catch (error) {
-        console.log(error);
+        setLoadingFun(false);
+        console.log("Dashboard fetch error:", error);
         return initialData;
     }
-}
+};
 
 export default fetchDashboardData

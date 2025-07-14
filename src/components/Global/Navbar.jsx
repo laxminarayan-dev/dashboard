@@ -103,7 +103,7 @@ const Navbar = () => {
           md:translate-x-0 md:block md:w-64 h-screen bg-white text-slate-900  w-64 rounded-br-xl rounded-tr-xl md:rounded-none overflow-auto`}
         >
           <div className="flex justify-between items-center pr-2 text-slate-800 ">
-            <Image src="/logo.png" width={70} height={70} alt="Logo" />
+            <Image src="/logo.png" width={70} height={70} alt="Logo" priority />
             <button
               aria-label="close-sidebar"
               className="md:hidden text-slate-900 cursor-pointer"
@@ -165,4 +165,4 @@ const Navbar = () => {
     </>
   );
 };
-export default Navbar;
+export default React.memo(Navbar);
